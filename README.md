@@ -1,2 +1,2 @@
 # convolution
-Using convolution for Imageprocessing such as filtering, edge detection. Convolutionional Neural Networks
+Using convolution for Image-Processing such as Filtering, Edge Detection. Convolutionional Neural Networks
