@@ -11,6 +11,7 @@ Source: wikipedia
 
 ![Convolution](./images/convolution_formula.jpg)
 
+
 # Applications
 ## Blur / Denoising (C++ / Python)
 Ahmet
