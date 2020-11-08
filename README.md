@@ -10,7 +10,6 @@ about what the convolution is doing:
 ![Convolution](https://upload.wikimedia.org/wikipedia/commons/6/6a/Convolution_of_box_signal_with_itself2.gif)
 
 <sub>Image Source: wikipedia</sub>
-
 ![Convolution](./images/convolution_formula.jpg)
 
 
