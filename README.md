@@ -1,5 +1,5 @@
 # Hardware Oriented Signal Processing
-<sub>Armin Niedermüller, Ahmet Cihat Bozkurt</sub>
+<sub>Armin Niedermï¿½ller, Ahmet Cihat Bozkurt</sub>
 Using convolution for Image-Processing such as Filtering, Edge Detection. Convolutionional Neural Networks
 
 # Introduction
