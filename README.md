@@ -12,7 +12,7 @@ about what the convolution is doing:
 <sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Convolution)</sub>
 
 The convolution formula...:\
-![Convolution](./images/convolution_formula.jpg)
+![Convolution](https://github.com/nerovalerius/convolution/images/convolution_formula.jpg)
 
 
 # Applications
@@ -29,11 +29,11 @@ Both are represented as matrices, where the kernel is smaller than the image, us
 When shifting the kernel over the image, it performis an elementwise multiplication with the part of the iamge it is currently on.
 The results of this operation are then summed up and written into a single output pixel as seen in the following images:
 
-![2D_Convolution](./images/image_convolution.jpg)
+![2D_Convolution](https://github.com/nerovalerius/convolution/images/image_convolution.jpg)
 
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
-![2D_Convolution_2](./images/image_convolution_2.jpg)
+![2D_Convolution_2](https://github.com/nerovalerius/convolution/images/image_convolution_2.jpg)
 
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
