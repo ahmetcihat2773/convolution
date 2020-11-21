@@ -33,7 +33,7 @@ The results of this operation are then summed up and written into a single outpu
 
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
-![2D_Convolution_2](https://github.com/nerovalerius/convolution/blob/main/images/image_convolution_2.gif | width=100)
+![2D_Convolution_2](https://github.com/nerovalerius/convolution/blob/main/images/image_convolution_2.gif =250x250)
 
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
