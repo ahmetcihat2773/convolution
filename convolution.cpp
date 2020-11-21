@@ -20,14 +20,11 @@
 int main(int argc, char** argv)
 {
 
-    using namespace std;
-    using namespace cv;
-
-    // Load our Image
-    Mat img = imread("images/harold_original.jpg");
-    namedWindow("image", WINDOW_NORMAL);
-    imshow("image", img);
-    waitKey(0);
+    // Load our Image -
+    cv::Mat img = cv::imread("images/harold_original.jpg");
+    cv::namedWindow("image", cv::WINDOW_NORMAL);
+    cv::imshow("image", img);
+    cv::waitKey(0);
     return 0;
 
 }
