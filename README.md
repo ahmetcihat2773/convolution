@@ -29,11 +29,11 @@ Both are represented as matrices, where the kernel is smaller than the image, us
 When shifting the kernel over the image, it performis an elementwise multiplication with the part of the iamge it is currently on.
 The results of this operation are then summed up and written into a single output pixel as seen in the following images:
 
-![2D_Convolution](https://github.com/nerovalerius/convolution/blob/main/images/image_convolution.gif | width=100)
+<img src="/images/image_convolution.gif" width="100" height="100"/>
 
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
-![2D_Convolution_2](https://github.com/nerovalerius/convolution/blob/main/images/image_convolution_2.gif =250x250)
+<img src="/images/image_convolution_2.gif" width="100" height="100"/>
 
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
