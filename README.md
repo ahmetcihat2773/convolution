@@ -8,7 +8,7 @@ The convolution f \* g is a mathematical operation on two functions f and g. The
 The result of f \* g  is the value of the area between the two overlapping functions f and g at each point when shifting g over f. The following image gives an intuitive idea 
 about what the convolution is doing:
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Convolution_of_box_signal_with_itself2.gif"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Convolution_of_box_signal_with_itself2.gif" width="300"/>
 <sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Convolution)</sub>
 
 The convolution formula...:\
