@@ -8,11 +8,11 @@ The convolution f \* g is a mathematical operation on two functions f and g. The
 The result of f \* g  is the value of the area between the two overlapping functions f and g at each point when shifting g over f. The following image gives an intuitive idea 
 about what the convolution is doing:
 
-![Convolution](https://upload.wikimedia.org/wikipedia/commons/6/6a/Convolution_of_box_signal_with_itself2.gif =50x)\
+![Convolution](https://upload.wikimedia.org/wikipedia/commons/6/6a/Convolution_of_box_signal_with_itself2.gif)\
 <sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Convolution)</sub>
 
 The convolution formula...:\
-![Convolution](https://github.com/nerovalerius/convolution/blob/main/images/convolution_formula.jpg =50x)
+![Convolution](https://github.com/nerovalerius/convolution/blob/main/images/convolution_formula.jpg)
 
 
 # Applications
@@ -29,11 +29,11 @@ Both are represented as matrices, where the kernel is smaller than the image, us
 When shifting the kernel over the image, it performis an elementwise multiplication with the part of the iamge it is currently on.
 The results of this operation are then summed up and written into a single output pixel as seen in the following images:
 
-![2D_Convolution](https://github.com/nerovalerius/convolution/blob/main/images/image_convolution.gif =50x)
+![2D_Convolution](https://github.com/nerovalerius/convolution/blob/main/images/image_convolution.gif | width=100)
 
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
-![2D_Convolution_2](https://github.com/nerovalerius/convolution/blob/main/images/image_convolution_2.gif =50x)
+![2D_Convolution_2](https://github.com/nerovalerius/convolution/blob/main/images/image_convolution_2.gif | width=100)
 
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
