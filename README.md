@@ -18,7 +18,28 @@ The convolution formula...:\
 # Applications
 
 ## Signal Filtering
-FIR Filter?
+What is a filter ? 
+For image processing or signal processing, unwanted components or features can be suppressed by applying filters. Filters can be used for different kinds of purposes such as anti-aliasing, power supply smoothing, noise suppression, etc. Filter types can be divided into different classes based on their construction, frequency response, impulse response.  
+## Based on Construction
+* Passive Filters :
+    Passive filters are designed with passive electronic components such as resistors, inductors ,and capacitors. Since electronic components are consuming energy during functioning, the energy of the input signal always less then the output signal energy in application.   
+* Active Filter
+    In active filters, apart from passive components which are mentioned above, active components are also used such as transistors, and amplifiers. Thanks to the active filters, unwanted parts of a signal can be suppressed and rest of the signal can be impowered.
+## Based on Frequency Response
+Filters are mainly classified into four classes which are lowpass filter, highpass filter, bandpass filter, and band-reject filter. The following picture shows the frequency response of each type of the filter.
+
+<img src="https://www.electricaltechnology.org/wp-content/uploads/2019/05/Types-Of-Filters-768x461.png" width="400"/>
+<sub>Image Source: [Electricaltechnology](https://www.electricaltechnology.org)</sub>
+
+* Low Pass Filter : 
+    Low pass filters are designed to allow frequencies which are lower than cutoff frequency and attenuate the rest. They are used in suppressing the noise, blocking high pitches in speakers, etc.
+* High Pass Filter : 
+    High pass filters are designed to allow frequencies which are higher than cutoff frequency and attenuate rest. They are used in low-frequency noise reduction, audio amplifiers etc. 
+* Band Pass Filter : 
+    Bandpass filters  have upper and lower cutoff frequencies and allow frequencies that are between these cutoff frequencies and attenuate the rest. They are used in wireless transmitters and receivers
+* Band Reject Filter : 
+    Band reject filters have upper and lower cutoff frequencies like band-pass filters and attenuate the frequencies which are between the cutoff frequencies and allow the rest.This type of filter is also used in telecommunication, audio signal processing, and many more.
+
 
 ## Image Processing
 
