@@ -19,7 +19,9 @@ The convolution formula...:\
 
 ## Signal Filtering
 What is a filter ? 
+
 For image processing or signal processing, unwanted components or features can be suppressed by applying filters. Filters can be used for different kinds of purposes such as anti-aliasing, power supply smoothing, noise suppression, etc. Filter types can be divided into different classes based on their construction, frequency response, impulse response.  
+
 ## Based on Construction
 * Passive Filters :
     Passive filters are designed with passive electronic components such as resistors, inductors ,and capacitors. Since electronic components are consuming energy during functioning, the energy of the input signal always less then the output signal energy in application.   
@@ -31,14 +33,38 @@ Filters are mainly classified into four classes which are lowpass filter, highpa
 <img src="https://www.electricaltechnology.org/wp-content/uploads/2019/05/Types-Of-Filters-768x461.png" width="400"/>
 <sub>Image Source: [Electricaltechnology](https://www.electricaltechnology.org)</sub>
 
-* Low Pass Filter : 
+
+### Low Pass Filter 
     Low pass filters are designed to allow frequencies which are lower than cutoff frequency and attenuate the rest. They are used in suppressing the noise, blocking high pitches in speakers, etc.
-* High Pass Filter : 
+### High Pass Filter
     High pass filters are designed to allow frequencies which are higher than cutoff frequency and attenuate rest. They are used in low-frequency noise reduction, audio amplifiers etc. 
-* Band Pass Filter : 
+### Band Pass Filter 
     Bandpass filters  have upper and lower cutoff frequencies and allow frequencies that are between these cutoff frequencies and attenuate the rest. They are used in wireless transmitters and receivers
-* Band Reject Filter : 
+### Band Reject Filter 
     Band reject filters have upper and lower cutoff frequencies like band-pass filters and attenuate the frequencies which are between the cutoff frequencies and allow the rest.This type of filter is also used in telecommunication, audio signal processing, and many more.
+## Based on Frequncy Response
+
+### FIR Filter
+    FIR(finite impulse response) filters don't have a feedback that's why output signal depends only on the current and previous input values. This can be seen in the given formula below.  It is called as finite impulse response because there is no feedback in the filter and this make the output signal drops to zero after some time interval. This can be observed in the figure SS. Another interesting property is FIR filters have linear phase response which means all the frequencies are shifted equally in frequency domain after filtering operation.
+
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/FIR_Filter.svg/600px-FIR_Filter.svg.png" width="400"/>
+<sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)</sub>
+
+
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c43ba6c329a471401e87fe17c6130d801602ffdf" width="400"/>
+<sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)</sub>
+
+    Here x[n] is the input signal, y[n] is the output signal, N is the filter order, b_i is the ith coefficient of filter.  
+
+### IIR Filter
+    IIR(infinite impulse response) filters have feedback from output to input that's why output depends on current and previous inputs and previous outputs. The feed back can be observed in the given figure SAS. TODO: give some information about IIR filter formula. 
+
+<img src="https://i1.wp.com/technobyte.org/wp-content/uploads/2019/12/IIR-filter-bloack-diagram-FIR-vs-IIR.jpg?w=371&ssl=1" width="400"/>
+<sub>Image Source: [Technobyte](https://technobyte.org)</sub>
+
+
+
 
 
 ## Image Processing
