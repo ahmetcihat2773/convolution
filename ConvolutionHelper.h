@@ -4,22 +4,24 @@
 #include <vector>
 #include<opencv2/opencv.hpp>
 
-class TransformationCalculator final
-{
-    // Step counter
-    uint step = 1;
-
-    // Steps switch
-    bool parameter1 = false;
-
-    // Loaded Image
-    cv::Mat img;
+class ConvolutionHelper final {
+private:
+    // Images and Matrices
+    cv::Mat input;
+    cv::Mat input_gray;
+    cv::Mat output;
+    cv::Mat detected_edges;
+    int lowThreshold = 0;
+    const int max_lowThreshold = 100;
+    const int ratio = 3;
+    const int kernel_size = 3;
 
 public:
-    int run(int argc, char** argv);
-
-private:
-    void loadImage();
+    int loadImage(int argc, char** argv);
     void displayImage();
-    std::pair<bool, int> ProcessArguments(int argc, char** argv);
+    int displayImage(cv::Mat image);
+    void convolution(cv::Mat kernel);
+    static void onChange(int pos, void* ptr);
+    void cannyThreshold(int);
+    int cannyEdge();
 };

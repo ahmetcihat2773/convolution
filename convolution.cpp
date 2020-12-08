@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include<opencv2/opencv.hpp>
+#include "ConvolutionHelper.h"
 
 
 // ------------------------------------------------------------------------------------------------------------
@@ -20,11 +21,22 @@
 int main(int argc, char** argv)
 {
 
+    // Create our helper class
+    ConvolutionHelper convolutionHelper;
+
+    // Load our Image
+    convolutionHelper.loadImage(argc, argv);
+    // convolutionHelper.displayImage();
+
+    // Canny Edge Detection
+    convolutionHelper.cannyEdge();
+
+    
     // Load our Image -
-    cv::Mat img = cv::imread("images/harold_original.jpg");
-    cv::namedWindow("image", cv::WINDOW_NORMAL);
-    cv::imshow("image", img);
-    cv::waitKey(0);
+    // cv::Mat img = cv::imread("images/harold_original.jpg");
+    // cv::namedWindow("image", cv::WINDOW_NORMAL);
+    // cv::imshow("image", img);
+    // cv::waitKey(0);
     return 0;
 
 }
