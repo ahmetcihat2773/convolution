@@ -103,14 +103,26 @@ $$X = \begin{bmatrix}1 & x_{1}\\
 <img src="/images/harold_gray_noise.jpg" width="300"/>
 <img src="/images/harold_gray_filtered.jpg" width="300"/>
 
-### Canny Edge Detection (C++ / Python)
+### Canny Edge Detection (C++)
 Armin
+
+<img src="/images/church.jpg" width="300"/>
+<img src="/images/church_canny.jpg" width="300"/>
+
 ### Sobel Edge Operator (C++ / Python)
 Ahmet
+
 ### Laplace operator (C++ / Python)
 Armin
+
+<img src="/images/trump.jpg" width="300"/>
+<img src="/images/trump_laplacian.jpg" width="300"/>
+
 ### Hough Line/Circle Transform (C++ / Python)
 Armin
+
+<img src="/images/chess.jpg" width="300"/>
+<img src="/images/chess_hough_line.jpg" width="300"/>
 
 ## Audio Processing
 Ahmet
