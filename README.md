@@ -99,15 +99,12 @@ $$X = \begin{bmatrix}1 & x_{1}\\
 1 & 1 & 1
 \end{bmatrix}$$
 
-<img src="/images/harold_gray.jpg" width="300"/>
-<img src="/images/harold_gray_noise.jpg" width="300"/>
-<img src="/images/harold_gray_filtered.jpg" width="300"/>
+<img src="/images/harold_gray.jpg" width="300"/> <img src="/images/harold_gray_noise.jpg" width="300"/> <img src="/images/harold_gray_filtered.jpg" width="300"/>
 
 ### Canny Edge Detection (C++)
 Armin
 
-<img src="/images/church.jpg" width="300"/>
-<img src="/images/church_canny.jpg" width="300"/>
+<img src="/images/church.jpg" width="350"/> <img src="/images/church_canny.jpg" width="350"/>
 
 ### Sobel Edge Operator (C++ / Python)
 Ahmet
@@ -115,14 +112,12 @@ Ahmet
 ### Laplace operator (C++ / Python)
 Armin
 
-<img src="/images/trump.jpg" width="300"/>
-<img src="/images/trump_laplacian.jpg" width="300"/>
+<img src="/images/trump.jpg" width="350"/> <img src="/images/trump_laplacian.jpg" width="350"/>
 
 ### Hough Line/Circle Transform (C++ / Python)
 Armin
 
-<img src="/images/chess.jpg" width="300"/>
-<img src="/images/chess_hough_line.jpg" width="300"/>
+<img src="/images/chess.jpg" width="350"/> <img src="/images/chess_hough_line.jpg" width="350"/>
 
 ## Audio Processing
 Ahmet
