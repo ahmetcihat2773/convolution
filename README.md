@@ -23,7 +23,7 @@ What is a filter ?
 For image processing or signal processing, unwanted components or features can be suppressed by applying filters. Filters can be used for different kinds of purposes such as anti-aliasing, power supply smoothing, noise suppression, etc. Filter types can be divided into different classes based on their construction, frequency response, impulse response.  
 
 ## Based on Construction
-### Passive Filters :
+### Passive Filter
 Passive filters are designed with passive electronic components such as resistors, inductors ,and capacitors. Since electronic components are consuming energy during functioning, the energy of the input signal always less then the output signal energy in application.   
 ### Active Filter
 In active filters, apart from passive components which are mentioned above, active components are also used such as transistors, and amplifiers. Thanks to the active filters, unwanted parts of a signal can be suppressed and rest of the signal can be impowered.
@@ -52,8 +52,10 @@ FIR(finite impulse response) filters don't have a feedback that's why output sig
 <sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)</sub>
 
 
+
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c43ba6c329a471401e87fe17c6130d801602ffdf" width="400"/>
 <sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)</sub>
+
 
 Here x[n] is the input signal, y[n] is the output signal, N is the filter order, b_i is the ith coefficient of filter.  
 
@@ -87,7 +89,20 @@ The results of this operation are then summed up and written into a single outpu
 
 The convolution in image processing can be used, amongst others, for the following fields:
 ### Blur / Denoising (C++ / Python)
-Ahmet
+Blurring method is generally used in the preprocessing of image to remove the noise or remove details in image. This can be done via a linear or nonlinear filter. 
+#### Linear Filter : 
+Averaging filters are linear filters and they are used to reduce the noise in an image. This type of the filter, replace the center values with the average of the neighborhood values to decrease the sharp transition if there is. Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter. For illustration, an averaging filter is applied to a noisy image. You can see the original, noisy, and filter result images below. 
+
+$$X = \begin{bmatrix}1 & x_{1}\\
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{bmatrix}$$
+
+<img src="/images/harold_gray.jpg" width="300"/>
+<img src="/images/harold_gray_noise.jpg" width="300"/>
+<img src="/images/harold_gray_filtered.jpg" width="300"/>
+
 ### Canny Edge Detection (C++ / Python)
 Armin
 ### Sobel Edge Operator (C++ / Python)
