@@ -93,15 +93,15 @@ Blurring method is generally used in the preprocessing of image to remove the no
 #### Linear Filter : 
 Averaging filters are linear filters and they are used to reduce the noise in an image. This type of the filter, replace the center values with the average of the neighborhood values to decrease the sharp transition if there is. Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter. For illustration, an averaging filter is applied to a noisy image. You can see the original, noisy, and filter result images below. 
 
-$$X = \begin{bmatrix}1 & x_{1}\\
+$$X = \begin{bmatrix}1 & 1 & 1\\
 1 & 1 & 1\\
 1 & 1 & 1\\
 1 & 1 & 1
 \end{bmatrix}$$
-
-<img src="/images/harold_gray.jpg" width="300"/>
-<img src="/images/harold_gray_noise.jpg" width="300"/>
-<img src="/images/harold_gray_filtered.jpg" width="300"/>
+#### Original Image
+Original Image | Image with Noise | Filtered Image
+:-----------------:|:---------------:|:----:
+<img src="/images/harold_gray.jpg" width="300"/>|<img src="/images/harold_gray_noise.png" width="300"/>| <img src="/images/harold_gray_filtered.jpg" width="300"/>
 
 ### Canny Edge Detection (C++ / Python)
 Armin
