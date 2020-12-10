@@ -25,3 +25,12 @@ show_img(img_filtered_avg,"Averaged Filter Applied")
 # Gaussian Filtering
 img_filtered_noise = cv2.GaussianBlur(img_noise,(5,5),1)
 show_img(img_filtered_noise,"Gaussian Filter")
+
+import numpy as np 
+import cv2
+from matplotlib import pyplot as plt 
+from skimage.util import random_noise
+def show_img(img,title):
+    cv2.imshow(title,img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

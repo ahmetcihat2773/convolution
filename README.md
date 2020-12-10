@@ -91,22 +91,17 @@ The convolution in image processing can be used, amongst others, for the followi
 ### Blur / Denoising (C++ / Python)
 Blurring method is generally used in the preprocessing of image to remove the noise or remove details in image. This can be done via a linear or nonlinear filter. 
 #### Linear Filter : 
-Averaging filters are linear filters and they are used to reduce the noise in an image. This type of the filter, replace the center values with the average of the neighborhood values to decrease the sharp transition if there is. Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter. For illustration, an averaging filter is applied to a noisy image. You can see the original, noisy, and filter result images below. 
+Averaging filters are linear filters and they are used to reduce the noise in an image. This type of the filter, replace the center values with the average of the neighborhood values to decrease the sharp transition if there is. Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter. A possible kernel is given below for averaging operation. Each of the element is 1 and at the end of the filter operation the result has to be normalized with the number of element in the kernel.
 
-$$X = \begin{bmatrix}1 & 1 & 1\\
+$$X = \frac{1}{9}\begin{bmatrix}1 & 1 & 1\\
 1 & 1 & 1\\
 1 & 1 & 1\\
-1 & 1 & 1
 \end{bmatrix}$$
-<<<<<<< HEAD
-#### Original Image
+For illustration, an averaging filter is applied to a noisy image. You can see the original, noisy, and filter result images below.
+
 Original Image | Image with Noise | Filtered Image
 :-----------------:|:---------------:|:----:
 <img src="/images/harold_gray.jpg" width="300"/>|<img src="/images/harold_gray_noise.png" width="300"/>| <img src="/images/harold_gray_filtered.jpg" width="300"/>
-=======
-
-<img src="/images/harold_gray.jpg" width="300"/> <img src="/images/harold_gray_noise.jpg" width="300"/> <img src="/images/harold_gray_filtered.jpg" width="300"/>
->>>>>>> ea51591d0fd2a732905b6072f6d4f7458e75c027
 
 ### Canny Edge Detection (C++)
 Armin
