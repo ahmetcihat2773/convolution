@@ -27,10 +27,10 @@ int main(int argc, char** argv)
     // convolutionHelper.displayImage();
 
     // Canny Edge Detection
-    //convolutionHelper.cannyEdge();
+    convolutionHelper.cannyEdge();
 
     // Laplacian Edge Detection
-    convolutionHelper.laplacianEdge();
+    //convolutionHelper.laplacianEdge();
 
     // Hough Line Transform
     //convolutionHelper.houghLineTransform();

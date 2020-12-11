@@ -54,7 +54,6 @@ FIR(finite impulse response) filters don't have a feedback that's why output sig
 
 
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c43ba6c329a471401e87fe17c6130d801602ffdf" width="400"/>
-<sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)</sub>
 
 
 Here x[n] is the input signal, y[n] is the output signal, N is the filter order, b_i is the ith coefficient of filter.  
@@ -62,7 +61,7 @@ Here x[n] is the input signal, y[n] is the output signal, N is the filter order,
 ### IIR Filter
 IIR(infinite impulse response) filters have feedback from output to input that's why output depends on current and previous inputs and previous outputs. The feed back can be observed in the given figure SAS. TODO: give some information about IIR filter formula. 
 
-<img src="https://i1.wp.com/technobyte.org/wp-content/uploads/2019/12/IIR-filter-bloack-diagram-FIR-vs-IIR.jpg?w=371&ssl=1" width="400"/>
+<img src="https://i1.wp.com/technobyte.org/wp-content/uploads/2019/12/IIR-filter-bloack-diagram-FIR-vs-IIR.jpg?w=371&ssl=1" width="350"/>
 <sub>Image Source: [Technobyte](https://technobyte.org)</sub>
 
 
@@ -88,7 +87,7 @@ The results of this operation are then summed up and written into a single outpu
 
 
 The convolution in image processing can be used, amongst others, for the following fields:
-### Blur / Denoising (C++ / Python)
+### Blur / Denoising
 Blurring method is generally used in the preprocessing of image to remove the noise or remove details in image. This can be done via a linear or nonlinear filter. 
 #### Linear Filter : 
 Averaging filters are linear filters and they are used to reduce the noise in an image. This type of the filter, replace the center values with the average of the neighborhood values to decrease the sharp transition if there is. Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter. A possible kernel is given below for averaging operation. Each of the element is 1 and at the end of the filter operation the result has to be normalized with the number of element in the kernel.
@@ -103,22 +102,40 @@ Original Image | Image with Noise | Filtered Image
 :-----------------:|:---------------:|:----:
 <img src="/images/harold_gray.jpg" width="300"/>|<img src="/images/harold_gray_noise.png" width="300"/>| <img src="/images/harold_gray_filtered.jpg" width="300"/>
 
-### Canny Edge Detection (C++)
-Armin
+### Canny Edge Detector
 
-<img src="/images/church.jpg" width="350"/> <img src="/images/church_canny.jpg" width="350"/>
+The canny edge detector is used to extract structural information from images. It reduces the data amount to be processed <sup>1</sup>.
+The following steps are conducted to extract edge information from an image with the canny algorithm <sup>2</sup>:
+* Convolving the image with a gaussian filter kernel to filter out noise
+![\Large K = \dfrac{1}{159}\begin{bmatrix} 2 & 4 & 5 & 4 & 2 \\ 4 & 9 & 12 & 9 & 4 \\ 5 & 12 & 15 & 12 & 5 \\ 4 & 9 & 12 & 9 & 4 \\ 2 & 4 & 5 & 4 & 2 \end{bmatrix}]
 
-### Sobel Edge Operator (C++ / Python)
+
+* Convolution with a pair of sobel kernels in X- and Y-direction an calculate the gradient of the image
+* Remove pixels which are not considered to be part of and edge, i.e. only thin lines will remain.
+* Apply a thresholding <sup>2</sup>: 
+	- If a pixel gradient is higher than the upper threshold, the pixel is accepted as an edge.
+	- If a pixel gradient value is below the lower threshold, then it is rejected.
+	- If the pixel gradient is between the two thresholds, then it will be accepted only if it is connected to a pixel that is above the upper threshold.
+
+Original Image | Canny Edge Output |
+:-------------:|:-----------------:|
+<img src="/images/church.jpg" width="350"/>|<img src="/images/church_canny.jpg" width="350"/>
+
+### Sobel Edge Operator
 Ahmet
 
-### Laplace operator (C++ / Python)
+### Laplace operator
 Armin
 
-<img src="/images/trump.jpg" width="350"/> <img src="/images/trump_laplacian.jpg" width="350"/>
+Original Image | Laplace Output |
+:-------------:|:--------------:|
+<img src="/images/trump.jpg" width="350"/>|<img src="/images/trump_laplacian.jpg" width="350"/>
 
-### Hough Line/Circle Transform (C++ / Python)
+### Hough Line/Circle Transform
 Armin
 
+Original Image | Hough Line Transform |
+:-------------:|:--------------------:|
 <img src="/images/chess.jpg" width="350"/> <img src="/images/chess_hough_line.jpg" width="350"/>
 
 ## Audio Processing
@@ -141,3 +158,6 @@ Armin + Ahmet
 Armin + Ahmet
 
 
+### Sources
+1. [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector)
+2. [Canny edge detector - OpenCV](https://docs.opencv.org/4.2.0/da/d5c/tutorial_canny_detector.html)
