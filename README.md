@@ -136,7 +136,11 @@ Ahmet
 ![](https://latex.codecogs.com/gif.latex?%5Cbegin%7Barray%7D%7Bl%7D%20G%20%3D%20%5Csqrt%7B%20G_%7Bx%7D%5E%7B2%7D%20&plus;%20G_%7By%7D%5E%7B2%7D%20%7D%20%5C%5C%20%5Ctheta%20%3D%20%5Carctan%28%5Cdfrac%7B%20G_%7By%7D%20%7D%7B%20G_%7Bx%7D%20%7D%29%20%5Cend%7Barray%7D)
 
 ### Laplace operator
-Armin
+While the Sobel Operator takes the first derivative of the image pixels, the Laplace Operator takes the second derivative.
+On edges, the second derivative is zero. Since an image can be interpreted as a signal in 2 dimensions, the Laplacian Operator is calculated for the whole image.
+Before calculating the Laplacian, a Gaussian blur is applied to remove noise<sup>3</sup>.
+
+![](https://latex.codecogs.com/gif.latex?Laplace%28f%29%20%3D%20%5Cdfrac%7B%5Cpartial%5E%7B2%7D%20f%7D%7B%5Cpartial%20x%5E%7B2%7D%7D%20&plus;%20%5Cdfrac%7B%5Cpartial%5E%7B2%7D%20f%7D%7B%5Cpartial%20y%5E%7B2%7D%7D)
 
 Original Image | Laplace Output |
 :-------------:|:--------------:|
@@ -147,7 +151,7 @@ Armin
 
 Original Image | Hough Line Transform |
 :-------------:|:--------------------:|
-<img src="/images/chess.jpg" width="350"/> <img src="/images/chess_hough_line.jpg" width="350"/>
+<img src="/images/chess.jpg" width="350"/>|<img src="/images/chess_hough_line.jpg" width="350"/>
 
 ## Audio Processing
 Ahmet
@@ -163,8 +167,6 @@ Armin + Ahmet
 ### Image Classification with CNNs and Tensorflow 2.0 / Keras
 Armin + Ahmet
 
-
-
 # Showcase
 Armin + Ahmet
 
@@ -172,3 +174,4 @@ Armin + Ahmet
 ### Sources
 1. [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector)
 2. [Canny edge detector - OpenCV](https://docs.opencv.org/4.2.0/da/d5c/tutorial_canny_detector.html)
+3. [Laplace operator - OpenCV](https://docs.opencv.org/4.2.0/d5/db5/tutorial_laplace_operator.html)
