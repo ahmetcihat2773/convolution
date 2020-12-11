@@ -78,11 +78,9 @@ When shifting the kernel over the image, it performis an elementwise multiplicat
 The results of this operation are then summed up and written into a single output pixel as seen in the following images:
 
 <img src="/images/image_convolution.gif" width="300"/>
-
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
 <img src="/images/image_convolution_2.gif" width="300"/>
-
 <sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
 
@@ -92,9 +90,9 @@ Blurring method is generally used in the preprocessing of image to remove the no
 #### Linear Filter : 
 Averaging filters are linear filters and they are used to reduce the noise in an image. This type of the filter, replace the center values with the average of the neighborhood values to decrease the sharp transition if there is.
 Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter.
-A possible kernel is given below for averaging operation. Each of the element is 1 and at the end of the filter operation the result has to be normalized with the number of element in the kernel.\
+A possible kernel is given below for averaging operation. Each of the element is 1 and at the end of the filter operation the result has to be normalized with the number of element in the kernel.
 
-![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B9%7D%5Cbegin%7Bbmatrix%7D%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5Cend%7Bbmatrix%7D)
+	![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B9%7D%5Cbegin%7Bbmatrix%7D%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5Cend%7Bbmatrix%7D)
 
 For illustration, an averaging filter is applied to a noisy image. You can see the original, noisy, and filter result images below.
 
@@ -130,6 +128,12 @@ Original Image | Canny Edge Output |
 
 ### Sobel Edge Operator
 Ahmet
+
+![](https://latex.codecogs.com/gif.latex?G_%7Bx%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%200%20%26%20&plus;1%20%5C%5C%20-2%20%26%200%20%26%20&plus;2%20%5C%5C%20-1%20%26%200%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)
+<br /><br />
+![](https://latex.codecogs.com/gif.latex?G_%7By%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%20-2%20%26%20-1%20%5C%5C%200%20%26%200%20%26%200%20%5C%5C%20&plus;1%20%26%20&plus;2%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)
+<br /><br />
+![](https://latex.codecogs.com/gif.latex?%5Cbegin%7Barray%7D%7Bl%7D%20G%20%3D%20%5Csqrt%7B%20G_%7Bx%7D%5E%7B2%7D%20&plus;%20G_%7By%7D%5E%7B2%7D%20%7D%20%5C%5C%20%5Ctheta%20%3D%20%5Carctan%28%5Cdfrac%7B%20G_%7By%7D%20%7D%7B%20G_%7Bx%7D%20%7D%29%20%5Cend%7Barray%7D)
 
 ### Laplace operator
 Armin
