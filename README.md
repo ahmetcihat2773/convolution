@@ -104,15 +104,15 @@ Original Image | Image with Noise | Filtered Image
 
 ### Canny Edge Detector
 
-The canny edge detector is used to extract structural information from images. It reduces the data amount to be processed <sup>1</sup>.
-The following steps are conducted to extract edge information from an image with the canny algorithm <sup>2</sup>:
+The canny edge detector is used to extract structural information from images. It reduces the data amount to be processed<sup>1</sup>.
+The following steps are conducted to extract edge information from an image with the canny algorithm<sup>2</sup>:
 * Convolving the image with a gaussian filter kernel to filter out noise
-![\Large K = \dfrac{1}{159}\begin{bmatrix} 2 & 4 & 5 & 4 & 2 \\ 4 & 9 & 12 & 9 & 4 \\ 5 & 12 & 15 & 12 & 5 \\ 4 & 9 & 12 & 9 & 4 \\ 2 & 4 & 5 & 4 & 2 \end{bmatrix}]
+![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B16%7D%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%201%20%5C%5C%202%20%26%204%20%26%202%20%5C%5C%201%20%26%202%20%26%201%20%5Cend%7Bbmatrix%7D)
 
 
 * Convolution with a pair of sobel kernels in X- and Y-direction an calculate the gradient of the image
 * Remove pixels which are not considered to be part of and edge, i.e. only thin lines will remain.
-* Apply a thresholding <sup>2</sup>: 
+* Apply a thresholding<sup>2</sup>: 
 	- If a pixel gradient is higher than the upper threshold, the pixel is accepted as an edge.
 	- If a pixel gradient value is below the lower threshold, then it is rejected.
 	- If the pixel gradient is between the two thresholds, then it will be accepted only if it is connected to a pixel that is above the upper threshold.
