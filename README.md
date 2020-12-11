@@ -108,7 +108,7 @@ The canny edge detector is used to extract structural information from images. I
 The following steps are conducted to extract edge information from an image with the canny algorithm<sup>2</sup>:
 * Convolving the image with a gaussian filter kernel to filter out noise
 
-	- ![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B16%7D%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%201%20%5C%5C%202%20%26%204%20%26%202%20%5C%5C%201%20%26%202%20%26%201%20%5Cend%7Bbmatrix%7D)
+	![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B16%7D%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%201%20%5C%5C%202%20%26%204%20%26%202%20%5C%5C%201%20%26%202%20%26%201%20%5Cend%7Bbmatrix%7D)
 
 * Convolution with a pair of sobel kernels in X- and Y-direction an calculate the gradient of the image
 
