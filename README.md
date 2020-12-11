@@ -90,12 +90,12 @@ The convolution in image processing can be used, amongst others, for the followi
 ### Blur / Denoising
 Blurring method is generally used in the preprocessing of image to remove the noise or remove details in image. This can be done via a linear or nonlinear filter. 
 #### Linear Filter : 
-Averaging filters are linear filters and they are used to reduce the noise in an image. This type of the filter, replace the center values with the average of the neighborhood values to decrease the sharp transition if there is. Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter. A possible kernel is given below for averaging operation. Each of the element is 1 and at the end of the filter operation the result has to be normalized with the number of element in the kernel.
+Averaging filters are linear filters and they are used to reduce the noise in an image. This type of the filter, replace the center values with the average of the neighborhood values to decrease the sharp transition if there is.
+Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter.
+A possible kernel is given below for averaging operation. Each of the element is 1 and at the end of the filter operation the result has to be normalized with the number of element in the kernel.\
 
-$$X = \frac{1}{9}\begin{bmatrix}1 & 1 & 1\\
-1 & 1 & 1\\
-1 & 1 & 1\\
-\end{bmatrix}$$
+![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B16%7D%5Cbegin%7Bbmatrix%7D%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5Cend%7Bbmatrix%7D)\
+
 For illustration, an averaging filter is applied to a noisy image. You can see the original, noisy, and filter result images below.
 
 Original Image | Image with Noise | Filtered Image
@@ -106,8 +106,9 @@ Original Image | Image with Noise | Filtered Image
 
 The canny edge detector is used to extract structural information from images. It reduces the data amount to be processed<sup>1</sup>.
 The following steps are conducted to extract edge information from an image with the canny algorithm<sup>2</sup>:
-* Convolving the image with a gaussian filter kernel to filter out noise
-![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B16%7D%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%201%20%5C%5C%202%20%26%204%20%26%202%20%5C%5C%201%20%26%202%20%26%201%20%5Cend%7Bbmatrix%7D)
+* Convolving the image with a gaussian filter kernel to filter out noise\
+
+![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B16%7D%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%201%20%5C%5C%202%20%26%204%20%26%202%20%5C%5C%201%20%26%202%20%26%201%20%5Cend%7Bbmatrix%7D)\
 
 
 * Convolution with a pair of sobel kernels in X- and Y-direction an calculate the gradient of the image
