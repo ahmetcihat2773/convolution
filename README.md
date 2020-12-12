@@ -145,7 +145,7 @@ Original Image | Laplace Output |
 
 After detecting edges inside an image by convolving with the Laplace/Sobel Operator, lines can be detected by conducting a Hugh Line Transform.
 
-Imagine a straight line represented by its function: $$k*x + d$$. The line is drawn by using different values of x. 
+Imagine a straight line represented by its function: $k*x + d$. The line is drawn by using different values of x. 
 Now imagine  a specific $$ P = (x_0, y_0)$$ on this very same line. This point can be also represented by different values of $$k and d$$, each representing a line in the k,d space.
 
 
