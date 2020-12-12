@@ -172,7 +172,7 @@ When different points are on a line with other points, each of their sinusoids i
 
 <sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
 
-That process is iteratively repated for every edge point in the image. Thats why before a Hough-Transform is conducted, a edge detection is needed.
+That process is iteratively repated for every edge point in the image. Thats why an edge detection is needed before conducting a Hough-Transform.
 
 
 Original Image | Hough Line Transform |
