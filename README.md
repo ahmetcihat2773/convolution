@@ -49,7 +49,7 @@ FIR(finite impulse response) filters don't have a feedback that's why output sig
 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/FIR_Filter.svg/600px-FIR_Filter.svg.png" width="400"/>
-<sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)</sub>
+<sub>Image Source: ![Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)</sub>
 
 
 
@@ -62,7 +62,7 @@ Here x[n] is the input signal, y[n] is the output signal, N is the filter order,
 IIR(infinite impulse response) filters have feedback from output to input that's why output depends on current and previous inputs and previous outputs. The feed back can be observed in the given figure SAS. TODO: give some information about IIR filter formula. 
 
 <img src="https://i1.wp.com/technobyte.org/wp-content/uploads/2019/12/IIR-filter-bloack-diagram-FIR-vs-IIR.jpg?w=371&ssl=1" width="350"/>
-<sub>Image Source: [Technobyte](https://technobyte.org)</sub>
+<sub>Image Source: ![Technobyte](https://technobyte.org)</sub>
 
 
 
