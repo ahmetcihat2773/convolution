@@ -148,29 +148,28 @@ After detecting edges inside an image by convolving with the Laplace/Sobel Opera
 Imagine a straight line represented by its function: k*x + d. The line is drawn by using different values of x. 
 Now imagine  a specific point P = (x_0, y_0) on this very same line. This point can be also represented by different values of k and d, each representing a line in the k,d space.
 
-
 All those lines inside the k,d space intersect at a specific point, this means that all the points in x,y space (which are a line in k,d space) lie on the same line in x,y space
 
-The hough transform works with polar coordinates, meaning that each point is defined by and angle θ and a radius ρ. Its a similar concept as the k,d space.
+The hough transform works with polar coordinates, meaning that each point is defined by and angle θ and a radius ρ. Its a similar concept as the k,d space<sup>4</sup>.
 The following image shows, that many different angles and radii can be used to define the point P. Each line is a point inside the angle/radius space, the so-called Hough-Space.
 
 
 ![](https://miro.medium.com/max/700/0*JT-hhPkp-Tx4ywtu.jpg)
 
-<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+<sub>[Source](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
 
 
 If every line is printed, a sinoid function appears.
 
 ![](https://miro.medium.com/max/700/0*pJDI5sW6oEBDQQqd.jpg)
 
-<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+<sub>[Source](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
 
 When different points are on a line with other points, each of their sinusoids intersect at one point as seen in the image.
 
 ![](https://miro.medium.com/max/700/0*VPVsLApWiEayRGdQ.jpg)
 
-<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+<sub>[Source](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
 
 That process is iteratively repated for every edge point in the image. Thats why an edge detection is needed before conducting a Hough-Transform.
 
@@ -191,6 +190,20 @@ Ahmet
 Armin + Ahmet
 ### Convolutional Neural Networks
 Armin + Ahmet
+
+A convolutional neuronal network (CNN) is a concrete case of Deep Learning neural networks<sup>5</sup>.
+There are two layers that define CNNs. First, convolution and second, pooling.
+
+The main purpose of a first convolutional layer is to detect features or visual features in images such as edges, lines, color drops, etc<sup>5</sup>.
+A second convolutional layer can learn patterns composed of basic elements learned in the previous layer.
+And so on until it learns very complex patterns. This allows convolutional neural networks to efficiently learn increasingly complex and abstract visual concepts<sup>5</sup>.
+
+
+
+![](https://miro.medium.com/max/2400/1*1zvB_6WIJjN1EHqqDMx95w.png)
+<sub>[Source](https://torres.ai/deeplearning/)</sub>
+
+
 ### Image Classification with CNNs and Tensorflow 2.0 / Keras
 Armin + Ahmet
 
@@ -203,3 +216,4 @@ Armin + Ahmet
 2. [Canny edge detector - OpenCV](https://docs.opencv.org/4.2.0/da/d5c/tutorial_canny_detector.html)
 3. [Laplace operator - OpenCV](https://docs.opencv.org/4.2.0/d5/db5/tutorial_laplace_operator.html)
 4. [Hough line transform - OpenCV](https://docs.opencv.org/4.2.0/d9/db0/tutorial_hough_lines.html)
+5. [Convolutional Neural Networks - TowardsDataScience](https://towardsdatascience.com/convolutional-neural-networks-for-beginners-using-keras-and-tensorflow-2-c578f7b3bf25)
