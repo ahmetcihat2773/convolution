@@ -52,7 +52,6 @@ FIR(finite impulse response) filters don't have a feedback that's why output sig
 Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)
 
 
-
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c43ba6c329a471401e87fe17c6130d801602ffdf" width="400"/>
 
 
