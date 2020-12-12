@@ -49,7 +49,7 @@ FIR(finite impulse response) filters don't have a feedback that's why output sig
 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/FIR_Filter.svg/600px-FIR_Filter.svg.png" width="400"/>
-Image Source: [Wikipedia - FIR](https://en.wikipedia.org/wiki/Finite_impulse_response)
+Image Source: [](https://en.wikipedia.org/wiki/Finite_impulse_response "[Wikipedia - FIR")
 <sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
 
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c43ba6c329a471401e87fe17c6130d801602ffdf" width="400"/>
