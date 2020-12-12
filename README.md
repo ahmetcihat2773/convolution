@@ -1,4 +1,4 @@
-# Hardware Oriented Signal Processing
+﻿# Hardware Oriented Signal Processing
 <sub>Armin Niedermueller, Ahmet Cihat Bozkurt</sub>
 
 Using convolution for Image-Processing such as Filtering, Edge Detection. Convolutionional Neural Networks
@@ -92,7 +92,7 @@ Averaging filters are linear filters and they are used to reduce the noise in an
 Although it is really useful for noise removing, smoothing the image reduces the edge information which is lied inside the image ,so this is a trade-off for the averaging filter.
 A possible kernel is given below for averaging operation. Each of the element is 1 and at the end of the filter operation the result has to be normalized with the number of element in the kernel.
 
-	![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B9%7D%5Cbegin%7Bbmatrix%7D%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5Cend%7Bbmatrix%7D)
+![](https://latex.codecogs.com/gif.latex?K%20%3D%20%5Cdfrac%7B1%7D%7B9%7D%5Cbegin%7Bbmatrix%7D%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5C%5C%201%20%26%201%20%26%201%20%5Cend%7Bbmatrix%7D)
 
 For illustration, an averaging filter is applied to a noisy image. You can see the original, noisy, and filter result images below.
 
@@ -147,7 +147,35 @@ Original Image | Laplace Output |
 <img src="/images/trump.jpg" width="350"/>|<img src="/images/trump_laplacian.jpg" width="350"/>
 
 ### Hough Line/Circle Transform
-Armin
+
+After detecting edges inside an image by convolving with the Laplace/Sobel Operator, lines can be detected by conducting a Hugh Line Transform.
+
+Imagine a straight line represented by its function: k*x + d. The line is drawn by using different values of x. 
+Now imagine  a specific point P = (x_0, y_0) on this very same line. This point can be also represented by different values of k and d, each representing a line in the k,d space.
+
+
+All those lines inside the k,d space intersect at a specific point, this means that all the points in x,y space (which are a line in k,d space) lie on the same line in x,y space
+
+The hough transform works with polar coordinates, meaning that each point is defined by and angle θ and a radius ρ. Its a similar concept as the k,d space.
+The following image shows, that many different angles and radii can be used to define the point P. Each line is a point inside the angle/radius space, the so-called Hough-Space.
+
+
+![](https://miro.medium.com/max/700/0*JT-hhPkp-Tx4ywtu.jpg)
+<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+
+
+If every line is printed, a sinoid function appears.
+
+![](https://miro.medium.com/max/700/0*pJDI5sW6oEBDQQqd.jpg)
+<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+
+When different points are on a line with other points, each of their sinusoids intersect at one point as seen in the image.
+
+![](https://miro.medium.com/max/700/0*VPVsLApWiEayRGdQ.jpg)
+<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+
+That process is iteratively repated for every edge point in the image. Thats why before a Hough-Transform is conducted, a edge detection is needed.
+
 
 Original Image | Hough Line Transform |
 :-------------:|:--------------------:|
@@ -175,3 +203,4 @@ Armin + Ahmet
 1. [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector)
 2. [Canny edge detector - OpenCV](https://docs.opencv.org/4.2.0/da/d5c/tutorial_canny_detector.html)
 3. [Laplace operator - OpenCV](https://docs.opencv.org/4.2.0/d5/db5/tutorial_laplace_operator.html)
+4. [Hough line transform - OpenCV](https://docs.opencv.org/4.2.0/d9/db0/tutorial_hough_lines.html)
