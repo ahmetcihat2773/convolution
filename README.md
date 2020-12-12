@@ -10,7 +10,7 @@ The result of f \* g  is the value of the area between the two overlapping funct
 about what the convolution is doing:
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Convolution_of_box_signal_with_itself2.gif" width="400"/>
-<sub>Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Convolution)</sub>
+<sub>Image Source: [Wikipedia - Convolution](https://en.wikipedia.org/wiki/Convolution)</sub>
 
 The convolution formula...:\
 <img src="/images/convolution_formula.jpg"/>
@@ -49,7 +49,7 @@ FIR(finite impulse response) filters don't have a feedback that's why output sig
 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/FIR_Filter.svg/600px-FIR_Filter.svg.png" width="400"/>
-Image Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_impulse_response)
+Image Source: [Wikipedia - FIR](https://en.wikipedia.org/wiki/Finite_impulse_response)
 
 
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c43ba6c329a471401e87fe17c6130d801602ffdf" width="400"/>
@@ -65,8 +65,6 @@ IIR(infinite impulse response) filters have feedback from output to input that's
 
 
 
-
-
 ## Image Processing
 
 An digital image can be interpreted as a two dimensional signal with coordinates x,y for each Pixel P(x,y).
@@ -77,11 +75,10 @@ When shifting the kernel over the image, it performis an elementwise multiplicat
 The results of this operation are then summed up and written into a single output pixel as seen in the following images:
 
 <img src="/images/image_convolution.gif" width="300"/>
-<sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
+<sub>Image Source: [TowardsDataScience - Convolution](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
 <img src="/images/image_convolution_2.gif" width="300"/>
-<sub>Image Source: [TowardsDataScience](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
-
+<sub>Image Source: [TowardsDataScience - Convolution 2](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
 
 The convolution in image processing can be used, amongst others, for the following fields:
 ### Blur / Denoising
@@ -160,18 +157,18 @@ The following image shows, that many different angles and radii can be used to d
 
 
 ![](https://miro.medium.com/max/700/0*JT-hhPkp-Tx4ywtu.jpg)
-<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+\\<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
 
 
 If every line is printed, a sinoid function appears.
 
 ![](https://miro.medium.com/max/700/0*pJDI5sW6oEBDQQqd.jpg)
-<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+\\<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
 
 When different points are on a line with other points, each of their sinusoids intersect at one point as seen in the image.
 
 ![](https://miro.medium.com/max/700/0*VPVsLApWiEayRGdQ.jpg)
-<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+\\<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
 
 That process is iteratively repated for every edge point in the image. Thats why before a Hough-Transform is conducted, a edge detection is needed.
 
