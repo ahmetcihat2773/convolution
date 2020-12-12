@@ -145,14 +145,14 @@ Original Image | Laplace Output |
 
 After detecting edges inside an image by convolving with the Laplace/Sobel Operator, lines can be detected by conducting a Hugh Line Transform.
 
-Imagine a straight line represented by its function: k*x + d. The line is drawn by using different values of x. 
-Now imagine  a specific point P = (x_0, y_0) on this very same line. This point can be also represented by different values of k and d, each representing a line in the k,d space.
+Imagine a straight line represented by its function: $$k*x + d$$. The line is drawn by using different values of x. 
+Now imagine  a specific $$ P = (x_0, y_0)$$ on this very same line. This point can be also represented by different values of $$k and d$$, each representing a line in the k,d space.
 
 
-All those lines inside the k,d space intersect at a specific point, this means that all the points in x,y space (which are a line in k,d space) lie on the same line in x,y space
+All those lines inside the $$k,d$$ space intersect at a specific point, this means that all the points in x,y space (which are a line in $$k,d$$ space) lie on the same line in x,y space
 
-The hough transform works with polar coordinates, meaning that each point is defined by and angle θ and a radius ρ. Its a similar concept as the k,d space.
-The following image shows, that many different angles and radii can be used to define the point P. Each line is a point inside the angle/radius space, the so-called Hough-Space.
+The hough transform works with polar coordinates, meaning that each point is defined by and angle θ and a radius ρ. Its a similar concept as the $$k,d$$ space.
+The following image shows, that many different angles and radii can be used to define the point $$P$$. Each line is a point inside the angle/radius space, the so-called Hough-Space.
 
 
 ![](https://miro.medium.com/max/700/0*JT-hhPkp-Tx4ywtu.jpg)
