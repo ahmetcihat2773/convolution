@@ -49,11 +49,10 @@ FIR(finite impulse response) filters don't have a feedback that's why output sig
 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/FIR_Filter.svg/600px-FIR_Filter.svg.png" width="400"/>
-Image Source: [](https://en.wikipedia.org/wiki/Finite_impulse_response "[Wikipedia - FIR")
-<sub>Image Source: [Hough Line Transform - Medium](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
+<sub>Image Source: https://en.wikipedia.org/wiki/Finite_impulse_response</sub>
 
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c43ba6c329a471401e87fe17c6130d801602ffdf" width="400"/>
-
+<sub>Image Source: https://en.wikipedia.org/wiki/Finite_impulse_response</sub>
 
 Here x[n] is the input signal, y[n] is the output signal, N is the filter order, b_i is the ith coefficient of filter.  
 
@@ -61,7 +60,7 @@ Here x[n] is the input signal, y[n] is the output signal, N is the filter order,
 IIR(infinite impulse response) filters have feedback from output to input that's why output depends on current and previous inputs and previous outputs. The feed back can be observed in the given figure SAS. TODO: give some information about IIR filter formula. 
 
 <img src="https://i1.wp.com/technobyte.org/wp-content/uploads/2019/12/IIR-filter-bloack-diagram-FIR-vs-IIR.jpg?w=371&ssl=1" width="350"/>
-<sub>Image Source: ![Technobyte](https://technobyte.org)</sub>
+<sub>Image Source: https://technobyte.org </sub>
 
 
 
@@ -75,10 +74,10 @@ When shifting the kernel over the image, it performis an elementwise multiplicat
 The results of this operation are then summed up and written into a single output pixel as seen in the following images:
 
 <img src="/images/image_convolution.gif" width="300"/>
-<sub>Image Source: [TowardsDataScience - Convolution](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
+<sub>Image Source: https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1 </sub>
 
 <img src="/images/image_convolution_2.gif" width="300"/>
-<sub>Image Source: [TowardsDataScience - Convolution 2](https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1)</sub>
+<sub>Image Source: https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1 </sub>
 
 The convolution in image processing can be used, amongst others, for the following fields:
 ### Blur / Denoising
