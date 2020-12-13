@@ -197,10 +197,9 @@ Ahmet
 Ahmet
 
 ## Artificial Intelligence / Deep Learning
-Armin + Ahmet
-### Convolutional Neural Networks
-Armin + Ahmet
+Ahmet
 
+### Convolutional Neural Networks
 A convolutional neuronal network (CNN) is a concrete case of Deep Learning neural networks<sup>5</sup>.
 There are two layers that define CNNs. First, convolution and second, pooling.
 
@@ -224,7 +223,6 @@ For each characteristic that should be detected, there exists a different filter
 
 
 #### Pooling
-
 After computing the first hidden layer, the next layer is the pooling layer. In the following example a 2*2 pooling window is sliding over the first hidden layer.
 Different pooling methods exist, like taking the average of the 2*2 points and putting it into the next layer. However, max-pooling tends to work better than alternative solutions<sup>5</sup>.
 The following image tries to explain the max pooling visually.
@@ -248,8 +246,6 @@ Each CNN contains as many pooling filters as there are convolutional filters:
 
 #### MNIST Database Clothing:
 Ahmet
-
-
 
 # Showcase
 Armin + Ahmet
