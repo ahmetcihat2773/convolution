@@ -231,7 +231,6 @@ Each CNN contains as many pooling filters as there are convolutional filters:
 
 
 
-
 ### Image Classification with CNNs and Tensorflow 2.0 / Keras
 Armin + Ahmet
 
