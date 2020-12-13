@@ -132,13 +132,18 @@ Original Image | Canny Edge Output |
 <img src="/images/church.jpg" width="350"/>|<img src="/images/church_canny.jpg" width="350"/>
 
 ### Sobel Edge Operator
-Ahmet
+Sobel edge operator is created for edge detection. Edge has big intensity difference with neighbor pixels. Edge detection is nothing but detecting the image areas where this kind of differences occur. The given figure below is explaining this definition well. There are two side in which the intensity differences can be observed by naked eyes. The figure at the middle, shows the intensity function with which white pixels are 255 and black pixels are 0. The transition between white and black creates extreme points that can be found with the first derivative. 
+<img src="https://i2.wp.com/www.adeveloperdiary.com/wp-content/uploads/2019/05/How-to-implement-Sobel-edge-detection-using-Python-from-scratch-adeveloperdiary.com-sobel.jpg?w=600&ssl=1">
 
-![](https://latex.codecogs.com/gif.latex?G_%7Bx%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%200%20%26%20&plus;1%20%5C%5C%20-2%20%26%200%20%26%20&plus;2%20%5C%5C%20-1%20%26%200%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)
-<br /><br />
-![](https://latex.codecogs.com/gif.latex?G_%7By%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%20-2%20%26%20-1%20%5C%5C%200%20%26%200%20%26%200%20%5C%5C%20&plus;1%20%26%20&plus;2%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)
-<br /><br />
-![](https://latex.codecogs.com/gif.latex?%5Cbegin%7Barray%7D%7Bl%7D%20G%20%3D%20%5Csqrt%7B%20G_%7Bx%7D%5E%7B2%7D%20&plus;%20G_%7By%7D%5E%7B2%7D%20%7D%20%5C%5C%20%5Ctheta%20%3D%20%5Carctan%28%5Cdfrac%7B%20G_%7By%7D%20%7D%7B%20G_%7Bx%7D%20%7D%29%20%5Cend%7Barray%7D)
+In order to find the extreme values, first derivative with respect to x and y is calculated by the given two kernels below. After that gradient magnitude is calculated and orientation of the gradient is calculated by the formulas given below.
+Horizontal Derivative | Vertical Derivative | Magnitude and Angle
+:-------------:|:-----------------:|:-------------:|
+![](https://latex.codecogs.com/gif.latex?G_%7Bx%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%200%20%26%20&plus;1%20%5C%5C%20-2%20%26%200%20%26%20&plus;2%20%5C%5C%20-1%20%26%200%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)|![](https://latex.codecogs.com/gif.latex?G_%7By%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%20-2%20%26%20-1%20%5C%5C%200%20%26%200%20%26%200%20%5C%5C%20&plus;1%20%26%20&plus;2%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)|![](https://latex.codecogs.com/gif.latex?%5Cbegin%7Barray%7D%7Bl%7D%20G%20%3D%20%5Csqrt%7B%20G_%7Bx%7D%5E%7B2%7D%20&plus;%20G_%7By%7D%5E%7B2%7D%20%7D%20%5C%5C%20%5Ctheta%20%3D%20%5Carctan%28%5Cdfrac%7B%20G_%7By%7D%20%7D%7B%20G_%7Bx%7D%20%7D%29%20%5Cend%7Barray%7D)
+
+Sobel operator is applied and results are given below. 
+Gx Gradient | Gy Gradient | Magnitude
+:-------------:|:-----------------:|:-------------:|
+|<img src="/images/gx.jpg" width="300"/>|<img src="/images/gy.jpg" width="300"/>| <img src="/images/sobel_result.jpg" width="300"/>
 
 ### Laplace operator
 While the Sobel Operator takes the first derivative of the image pixels, the Laplace Operator takes the second derivative.
@@ -254,3 +259,6 @@ Armin + Ahmet
 3. [Laplace operator - OpenCV](https://docs.opencv.org/4.2.0/d5/db5/tutorial_laplace_operator.html)
 4. [Hough line transform - OpenCV](https://docs.opencv.org/4.2.0/d9/db0/tutorial_hough_lines.html)
 5. [Convolutional Neural Networks - TowardsDataScience](https://towardsdatascience.com/convolutional-neural-networks-for-beginners-using-keras-and-tensorflow-2-c578f7b3bf25)
+6. [Signal Filtering](https://www.electricaltechnology.org)
+7. [Blur/Denoising](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_tutorials.html)
+8. [Sobel Operator](https://docs.opencv.org/4.2.0/d2/d2c/tutorial_sobel_derivatives.html)
