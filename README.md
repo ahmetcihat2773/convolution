@@ -225,14 +225,21 @@ In the middle image, the 2*2 pooling windows are shown over the image, which lat
 
 Each CNN contains as many pooling filters as there are convolutional filters:
 
-![](https://miro.medium.com/max/700/1*N2lOjB8ELRwyqJlcCUhWBw.png)
+![](https://miro.medium.com/max/700/1*CKgnKTEITrPKaDiG_536Mg.png)
 <sub>[Source](https://towardsdatascience.com/convolutional-neural-networks-for-beginners-using-keras-and-tensorflow-2-c578f7b3bf25)</sub>
 
 
-
-
 ### Image Classification with CNNs and Tensorflow 2.0 / Keras
-Armin + Ahmet
+
+#### MNIST Database Digits:
+
+<img src="/images/result_mnist_digits_cnn.jpg"/>
+
+
+#### MNIST Database Clothing:
+Ahmet
+
+
 
 # Showcase
 Armin + Ahmet
