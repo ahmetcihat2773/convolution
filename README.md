@@ -202,10 +202,9 @@ Ahmet
 Ahmet
 
 ## Artificial Intelligence / Deep Learning
-Armin + Ahmet
-### Convolutional Neural Networks
-Armin + Ahmet
+Ahmet
 
+### Convolutional Neural Networks
 A convolutional neuronal network (CNN) is a concrete case of Deep Learning neural networks<sup>5</sup>.
 There are two layers that define CNNs. First, convolution and second, pooling.
 
@@ -215,6 +214,7 @@ A second convolutional layer can learn patterns composed of basic elements learn
 And so on until it learns very complex patterns. This allows convolutional neural networks to efficiently learn increasingly complex and abstract visual concepts<sup>5</sup>.
 
 ![](https://miro.medium.com/max/2400/1*1zvB_6WIJjN1EHqqDMx95w.png)
+
 <sub>[Source](https://towardsdatascience.com/convolutional-neural-networks-for-beginners-using-keras-and-tensorflow-2-c578f7b3bf25)</sub>
 
 The first layer of the CNN can be a sliding window of N*N pixels which convolves over the whole image. For each sliding position, the windows gives the input to the first 
@@ -223,31 +223,38 @@ this means that the window can slide 23 pixels to the right and 23 pixels to the
 While sliding over the image, the neurons are computed by the scalar product of the filter kernel and the neurons.
 
 ![](https://miro.medium.com/max/691/1*IZIRyb-BqcAvZnOTZSuG3w.png)
+
 <sub>[Source](https://towardsdatascience.com/convolutional-neural-networks-for-beginners-using-keras-and-tensorflow-2-c578f7b3bf25)</sub>
 
 For each characteristic that should be detected, there exists a different filter kernel. A CNN therefore inherits several filters.
 
 
 #### Pooling
-
 After computing the first hidden layer, the next layer is the pooling layer. In the following example a 2*2 pooling window is sliding over the first hidden layer.
 Different pooling methods exist, like taking the average of the 2*2 points and putting it into the next layer. However, max-pooling tends to work better than alternative solutions<sup>5</sup>.
 The following image tries to explain the max pooling visually.
 In the middle image, the 2*2 pooling windows are shown over the image, which later corresponds to the right image which only contains the max value of each 2*2 area.
 
 ![](https://miro.medium.com/max/700/1*mBEB4nJFJst-yoExpXgABg.png)
+
 <sub>[Source](https://towardsdatascience.com/convolutional-neural-networks-for-beginners-using-keras-and-tensorflow-2-c578f7b3bf25)</sub>
 
 Each CNN contains as many pooling filters as there are convolutional filters:
 
-![](https://miro.medium.com/max/700/1*N2lOjB8ELRwyqJlcCUhWBw.png)
+![](https://miro.medium.com/max/700/1*CKgnKTEITrPKaDiG_536Mg.png)
+
 <sub>[Source](https://towardsdatascience.com/convolutional-neural-networks-for-beginners-using-keras-and-tensorflow-2-c578f7b3bf25)</sub>
 
 
-
-
 ### Image Classification with CNNs and Tensorflow 2.0 / Keras
-Armin + Ahmet
+
+#### MNIST Database Digits:
+
+<img src="/images/result_mnist_digits_cnn.jpg"/>
+
+
+#### MNIST Database Clothing:
+Ahmet
 
 # Showcase
 Armin + Ahmet
