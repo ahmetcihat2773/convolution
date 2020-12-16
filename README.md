@@ -156,43 +156,6 @@ Original Image | Laplace Output |
 :-------------:|:--------------:|
 <img src="/images/trump.jpg" width="350"/>|<img src="/images/trump_laplacian.jpg" width="350"/>
 
-### Hough Line/Circle Transform
-
-After detecting edges inside an image by convolving with the Laplace/Sobel Operator, lines can be detected by conducting a Hugh Line Transform.
-
-Imagine a straight line represented by its function: k*x + d. The line is drawn by using different values of x. 
-Now imagine  a specific point P = (x_0, y_0) on this very same line. This point can be also represented by different values of k and d, each representing a line in the k,d space.
-
-All those lines inside the k,d space intersect at a specific point, this means that all the points in x,y space (which are a line in k,d space) lie on the same line in x,y space
-
-The hough transform works with polar coordinates, meaning that each point is defined by and angle θ and a radius ρ. Its a similar concept as the k,d space<sup>4</sup>.
-The following image shows, that many different angles and radii can be used to define the point P. Each line is a point inside the angle/radius space, the so-called Hough-Space.
-
-
-![](https://miro.medium.com/max/700/0*JT-hhPkp-Tx4ywtu.jpg)
-
-<sub>[Source](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
-
-
-If every line is printed, a sinoid function appears.
-
-![](https://miro.medium.com/max/700/0*pJDI5sW6oEBDQQqd.jpg)
-
-<sub>[Source](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
-
-When different points are on a line with other points, each of their sinusoids intersect at one point as seen in the image.
-
-![](https://miro.medium.com/max/700/0*VPVsLApWiEayRGdQ.jpg)
-
-<sub>[Source](https://medium.com/@tomasz.kacmajor/hough-lines-transform-explained-645feda072ab)</sub>
-
-That process is iteratively repated for every edge point in the image. Thats why an edge detection is needed before conducting a Hough-Transform.
-
-
-Original Image | Hough Line Transform |
-:-------------:|:--------------------:|
-<img src="/images/chess.jpg" width="350"/>|<img src="/images/chess_hough_line.jpg" width="350"/>
-
 
 ## Audio Processing
 Ahmet
