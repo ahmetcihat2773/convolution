@@ -54,10 +54,10 @@ class MplCanvas(FigureCanvasQTAgg):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
 
         # Plot and its title
-        fig = Figure(figsize=(width, height), dpi=dpi)
-        fig.suptitle('Functions: Time Domain | Fourier Domain')
+        fig = Figure(figsize=(width, height), dpi=dpi,tight_layout=True)
 
         # Format spaces between plots
+        
         fig.subplots_adjust(left=0.125,
                   bottom=0.1, 
                   right=0.9, 
@@ -88,7 +88,7 @@ class MplCanvas(FigureCanvasQTAgg):
 
 
 # The Main window of our program
-class MainWindow(QWidget):
+class MainWindow(QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -98,46 +98,52 @@ class MainWindow(QWidget):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         # Set Window Size and Title
-        self.setGeometry(200, 200, 1200, 900)
-        self.setWindowTitle('Up- and Downsampling Demonstration - Armin Niedermüller')
+        self.showMaximized()
+        self.setWindowTitle(' ')
 
-        # Define a grid layout
-        grid_layout = QGridLayout()
-        self.setLayout(grid_layout)
+        self.ver_main = QtWidgets.QVBoxLayout()
+        self.ver_widget = QtWidgets.QWidget()
+        self.ver_widget.setLayout(self.ver_main)
 
         # Define the Plot with its subplots
         self.canvas = MplCanvas(self, width=5, height=4, dpi=100)
-
+        self.ver_main.addWidget(self.canvas,stretch=5)
         # Create a slider
-        self.convolutionSlider = QSlider(Qt.Horizontal)
-        self.convolutionSlider.setRange(0,10)               # maximum range is signal lenght * 2 ?
-        self.convolutionSlider.setSingleStep(1) 
-        self.convolutionSlider.setValue(1)
-        self.convolutionSlider.setTickInterval(1)
-        self.convolutionSlider.setTickPosition(QSlider.TicksBothSides)
+        self.convolutionSlider = self.createSlider(0,10)
+        self.ver_main.addWidget(self.convolutionSlider)
 
-            
-        # Creat Buttons
-        self.fxButton = QPushButton('Set', self)
-        self.gxButton = QPushButton('Set', self)
+        self.fxAmpliteSlider = self.createSlider(0,10)
+        self.fxFreqSlider = self.createSlider(0,10)
+        self.gxAmpliteSlider = self.createSlider(0,10)
+        self.gxFreqSlider = self.createSlider(0,10)
+       
+        # Create Dropbox
+        self.fxDropbox = QtWidgets.QComboBox()
+        self.fxDropbox.addItem("Sine")
+        self.fxDropbox.addItem("Square")
+        self.fxDropbox.addItem("Triangle")
+        self.gxDropbox = QtWidgets.QComboBox()
+        self.gxDropbox.addItem("Sine")
+        self.gxDropbox.addItem("Square")
+        self.gxDropbox.addItem("Triangle")
 
         # Create Labels
+        # fx labels
         self.fxLabel = QtWidgets.QLabel()
-        self.fxLabel.setText('Type in a function f(x):')
+        self.fxLabel.setText('f(x):')
+        self.fxAmp = QtWidgets.QLabel()
+        self.fxAmp.setText('Amplitude')
+        self.fxFreq = QtWidgets.QLabel()
+        self.fxFreq.setText('Frequency')
+        #gx labels
+        self.gxAmp = QtWidgets.QLabel()
+        self.gxAmp.setText('Amplitude')
+        self.gxFreq = QtWidgets.QLabel()
+        self.gxFreq.setText('Frequency')
         self.gxLabel = QtWidgets.QLabel()
-        self.gxLabel.setText('Type in a function g(x):')
-
-        # Create Textboxes
-        self.fxInput = QLineEdit(self)
-        self.gxInput = QLineEdit(self)
-
+        self.gxLabel.setText('g(x):')
         # Connect the sliders to our plots - if the slider value changes, the plot is updated
         self.convolutionSlider.valueChanged[int].connect(self.upsamplePlot)
-
-        # Connect the Buttons to the input reading functions
-        self.fxButton.clicked.connect(self.readFx)
-        self.gxButton.clicked.connect(self.readGx)
-
 
         #  GRID Layout
         #      1                              6                        12                          18
@@ -149,20 +155,43 @@ class MainWindow(QWidget):
         #   16 | f(x) Dropbox (Function Type) | f(x) Slider Amplitude  | f(x) Slider Frequency      |
         #   17 | g(x) Dropbox (Function Type) | g(x) Slider Amplitude  | g(x) Slider Frequency      |
         #   18 |____________________________________________________________________________________|
-
-
-
+        # fx
+        fxWidget = QtWidgets.QWidget()
+        self.hor_fx = QtWidgets.QHBoxLayout()
+        self.hor_fx.addWidget(self.fxLabel)
+        self.hor_fx.addWidget(self.fxDropbox)
+        self.hor_fx.addWidget(self.fxAmp)
+        self.hor_fx.addWidget(self.fxAmpliteSlider)
+        self.hor_fx.addWidget(self.fxFreq)
+        self.hor_fx.addWidget(self.fxFreqSlider)
+        fxWidget.setLayout(self.hor_fx)
+        self.ver_main.addWidget(fxWidget)
+        # gx 
+        gxWidget = QtWidgets.QWidget()
+        self.hor_gx = QtWidgets.QHBoxLayout()
+        self.hor_gx.addWidget(self.gxLabel)
+        self.hor_gx.addWidget(self.gxDropbox)
+        self.hor_gx.addWidget(self.gxAmp)
+        self.hor_gx.addWidget(self.gxAmpliteSlider)
+        self.hor_gx.addWidget(self.gxFreq)
+        self.hor_gx.addWidget(self.gxFreqSlider)
+        gxWidget.setLayout(self.hor_gx)
+        self.ver_main.addWidget(gxWidget)
         # Lets make 20 Columns and 20 Rows
-        grid_layout.addWidget(self.fxLabel, 3,1,1,2) # start from row=3, column=1, span over 1 row and 2 columns
-
-        grid_layout.addWidget(self.fxInput, 3,3,1,2)    #  dropbox
-        grid_layout.addWidget(self.fxButton, 3,6,1,2)   #  slider amp
-        grid_layout.addWidget(self.gxLabel, 9,1,1,2)    #  slider freq
-        grid_layout.addWidget(self.gxInput, 9,3,1,2)    #
-        grid_layout.addWidget(self.gxButton, 9,6,1,2)   # s
-
-        grid_layout.addWidget(self.canvas, 1,1,14,18) # start from row=1, column=1, span over 14 rows and 18 columns
-        grid_layout.addWidget(self.convolutionSlider, 15,1,1,18)     
+        self.setCentralWidget(self.ver_widget)
+        """
+        grid_layout.addWidget(self.fxDropbox, 16,2,16,6)    # start from row=3, column=1, span over 1 row and 2 columns
+        grid_layout.addWidget(self.labelAmp, 16,8,16,15)
+        grid_layout.addWidget(self.fxAmpliteSlider, 16,10,16,21)
+        grid_layout.addWidget(self.labelFreq, 16,25,16,35)
+        grid_layout.addWidget(self.fxFreqSlider, 17,22,17,27)   #  slider amp
+        """
+        """
+        grid_layout.addWidget(self.gxDropbox, 17,2,17,6)    #  slider freq
+        grid_layout.addWidget(self.gxLabel, 17,1,17,2)
+        grid_layout.addWidget(self.gxAmpliteSlider,17,7,17,12)    #
+        grid_layout.addWidget(self.gxFreqSlider, 17,13,17,18)   # s
+        """
 
        
         # A dictionary where our functions are stored
@@ -173,18 +202,14 @@ class MainWindow(QWidget):
 
 
     # Function reader
-    def readFx(self):
-        functionValue = self.fxInput.text()
-        QMessageBox.question(self, 'f(x)', "f(x): " + functionValue, QMessageBox.Ok, QMessageBox.Ok)
-        self.fxInput.setText("")
-
-    # Function reader
-    def readGx(self):
-        functionValue = self.gxInput.text()
-        QMessageBox.question(self, 'g(x)', "g(x): " + functionValue, QMessageBox.Ok, QMessageBox.Ok)
-        self.gxInput.setText("")
-
-
+    def createSlider(self,min_val,max_val):
+        slider = QSlider(Qt.Horizontal)
+        slider.setRange(min_val,max_val)               # maximum range is signal lenght * 2 ?
+        slider.setSingleStep(1) 
+        slider.setValue(1)
+        slider.setTickInterval(1)
+        slider.setTickPosition(QSlider.TicksBothSides)
+        return slider
     # Add a function to our plots
     def addFunction(self, y, x, color, name, f_s, length):
         
