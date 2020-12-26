@@ -13,7 +13,7 @@ about what the convolution is doing:
 <sub>Image Source: [Wikipedia - Convolution](https://en.wikipedia.org/wiki/Convolution)</sub>
 
 The convolution formula...:\
-<img src="/images/convolution_formula.jpg"/>
+![convolution formula](images/convolution_formula.jpg)
 
 # Applications
 
@@ -30,7 +30,7 @@ In active filters, apart from passive components which are mentioned above, acti
 ## Based on Frequency Response
 Filters are mainly classified into four classes which are lowpass filter, highpass filter, bandpass filter, and band-reject filter. The following picture shows the frequency response of each type of the filter.
 
-<img src="https://www.electricaltechnology.org/wp-content/uploads/2019/05/Types-Of-Filters-768x461.png" width="400"/>
+![](images/type_filters.png)
 <sub>Image Source: [Electricaltechnology](https://www.electricaltechnology.org)</sub>
 
 
@@ -42,16 +42,18 @@ High pass filters are designed to allow frequencies which are higher than cutoff
 Bandpass filters  have upper and lower cutoff frequencies and allow frequencies that are between these cutoff frequencies and attenuate the rest. They are used in wireless transmitters and receivers
 ### Band Reject Filter 
 Band reject filters have upper and lower cutoff frequencies like band-pass filters and attenuate the frequencies which are between the cutoff frequencies and allow the rest.This type of filter is also used in telecommunication, audio signal processing, and many more.
-## Based on Frequncy Response
+
 
 ### FIR Filter
 FIR(finite impulse response) filters don't have a feedback that's why output signal depends only on the current and previous input values. This can be seen in the given formula below.  It is called as finite impulse response because there is no feedback in the filter and this make the output signal drops to zero after some time interval. This can be observed in the figure SS. Another interesting property is FIR filters have linear phase response which means all the frequencies are shifted equally in frequency domain after filtering operation.
 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/FIR_Filter.svg/600px-FIR_Filter.svg.png" width="400"/>
+<br/>
 <sub>Image Source: https://en.wikipedia.org/wiki/Finite_impulse_response</sub>
-
+<br/><br/>
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c43ba6c329a471401e87fe17c6130d801602ffdf" width="400"/>
+<br/>
 <sub>Image Source: https://en.wikipedia.org/wiki/Finite_impulse_response</sub>
 
 Here x[n] is the input signal, y[n] is the output signal, N is the filter order, b_i is the ith coefficient of filter.  
@@ -60,6 +62,7 @@ Here x[n] is the input signal, y[n] is the output signal, N is the filter order,
 IIR(infinite impulse response) filters have feedback from output to input that's why output depends on current and previous inputs and previous outputs. The feed back can be observed in the given figure SAS. TODO: give some information about IIR filter formula. 
 
 <img src="https://i1.wp.com/technobyte.org/wp-content/uploads/2019/12/IIR-filter-bloack-diagram-FIR-vs-IIR.jpg?w=371&ssl=1" width="350"/>
+<br/>
 <sub>Image Source: https://technobyte.org </sub>
 
 
@@ -73,10 +76,8 @@ Both are represented as matrices, where the kernel is smaller than the image, us
 When shifting the kernel over the image, it performis an elementwise multiplication with the part of the iamge it is currently on.
 The results of this operation are then summed up and written into a single output pixel as seen in the following images:
 
-<img src="/images/image_convolution.gif" width="300"/>
-<sub>Image Source: https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1 </sub>
+![convolution2](images/image_convolution_2.gif)
 
-<img src="/images/image_convolution_2.gif" width="300"/>
 <sub>Image Source: https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1 </sub>
 
 The convolution in image processing can be used, amongst others, for the following fields:
@@ -93,17 +94,16 @@ For illustration, an averaging filter is applied to a noisy image. You can see t
 
 Original Image | Image with Noise | Filtered Image
 :-----------------:|:---------------:|:----:
-<img src="/images/harold_gray.jpg" width="300"/>|<img src="/images/harold_gray_noise.PNG" width="300"/>| <img src="/images/harold_gray_filtered.jpg" width="300"/>
+![harold](images/harold_gray.jpg)|![harold_noise](images/harold_gray_noise.PNG)|![harold filtered](images/harold_gray_filtered.jpg)
 
 #### Non-Linear Filters : 
 Median filter can be an example of the nonlinear filter since its nonlinear characteristic. This type of filter, replaces the median of the kernel elements with the center pixel of the kernel. Median filter is specifically effective with salt and pepper noise because this noise occurs as a white or black points. Most of the cases, these points cause instant changes in images and replacing the median of the neighborhood of the noise pixel removes the noise pixel.  
 
 For illustration, an median filter is applied to an image that has salt and pepper noise. You can see the original, noisy, and filter result images below. 
 
-
 Original Image | Image with Noise | Filtered Image
 :-----------------:|:---------------:|:----:
-<img src="/images/harold_gray.jpg" width="300"/>|<img src="/images/saltpepper.jpg" width="300"/>| <img src="/images/median_filtered.jpg" width="300"/>
+![harold](images/harold_gray.jpg)|![harold_noise](images/harold_gray_noise.PNG)|![harold filtered](images/median_filtered.jpg)
 
 ### Canny Edge Detector
 
@@ -129,21 +129,29 @@ The following steps are conducted to extract edge information from an image with
 
 Original Image | Canny Edge Output |
 :-------------:|:-----------------:|
-<img src="/images/church.jpg" width="350"/>|<img src="/images/church_canny.jpg" width="350"/>
+![chess](images/church.jpg)|![chess hough](images/church_canny.jpg)
 
 ### Sobel Edge Operator
 Sobel edge operator is created for edge detection. Edge has big intensity difference with neighbor pixels. Edge detection is nothing but detecting the image areas where this kind of differences occur. The given figure below is explaining this definition well. There are two side in which the intensity differences can be observed by naked eyes. The figure at the middle, shows the intensity function with which white pixels are 255 and black pixels are 0. The transition between white and black creates extreme points that can be found with the first derivative. 
 <img src="https://i2.wp.com/www.adeveloperdiary.com/wp-content/uploads/2019/05/How-to-implement-Sobel-edge-detection-using-Python-from-scratch-adeveloperdiary.com-sobel.jpg?w=600&ssl=1">
 
+<sub>Image Source: http://stanford.edu/ </sub>
+
 In order to find the extreme values, first derivative with respect to x and y is calculated by the given two kernels below. After that gradient magnitude is calculated and orientation of the gradient is calculated by the formulas given below.
-Horizontal Derivative | Vertical Derivative | Magnitude and Angle
-:-------------:|:-----------------:|:-------------:|
-![](https://latex.codecogs.com/gif.latex?G_%7Bx%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%200%20%26%20&plus;1%20%5C%5C%20-2%20%26%200%20%26%20&plus;2%20%5C%5C%20-1%20%26%200%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)|![](https://latex.codecogs.com/gif.latex?G_%7By%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%20-2%20%26%20-1%20%5C%5C%200%20%26%200%20%26%200%20%5C%5C%20&plus;1%20%26%20&plus;2%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)|![](https://latex.codecogs.com/gif.latex?%5Cbegin%7Barray%7D%7Bl%7D%20G%20%3D%20%5Csqrt%7B%20G_%7Bx%7D%5E%7B2%7D%20&plus;%20G_%7By%7D%5E%7B2%7D%20%7D%20%5C%5C%20%5Ctheta%20%3D%20%5Carctan%28%5Cdfrac%7B%20G_%7By%7D%20%7D%7B%20G_%7Bx%7D%20%7D%29%20%5Cend%7Barray%7D)
+
+<br /><br />
+	![](https://latex.codecogs.com/gif.latex?G_%7Bx%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%200%20%26%20&plus;1%20%5C%5C%20-2%20%26%200%20%26%20&plus;2%20%5C%5C%20-1%20%26%200%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)
+<br /><br />
+	![](https://latex.codecogs.com/gif.latex?G_%7By%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-1%20%26%20-2%20%26%20-1%20%5C%5C%200%20%26%200%20%26%200%20%5C%5C%20&plus;1%20%26%20&plus;2%20%26%20&plus;1%20%5Cend%7Bbmatrix%7D)
+<br /><br />
+	![](https://latex.codecogs.com/gif.latex?%5Cbegin%7Barray%7D%7Bl%7D%20G%20%3D%20%5Csqrt%7B%20G_%7Bx%7D%5E%7B2%7D%20&plus;%20G_%7By%7D%5E%7B2%7D%20%7D%20%5C%5C%20%5Ctheta%20%3D%20%5Carctan%28%5Cdfrac%7B%20G_%7By%7D%20%7D%7B%20G_%7Bx%7D%20%7D%29%20%5Cend%7Barray%7D)
+
 
 Sobel operator is applied and results are given below. 
+
 Gx Gradient | Gy Gradient | Magnitude
 :-------------:|:-----------------:|:-------------:|
-|<img src="/images/gx.jpg" width="300"/>|<img src="/images/gy.jpg" width="300"/>| <img src="/images/sobel_result.jpg" width="300"/>
+|![](images/gx.jpg)|![](images/gy.jpg)| ![](images/sobel_result.jpg)
 
 ### Laplace operator
 While the Sobel Operator takes the first derivative of the image pixels, the Laplace Operator takes the second derivative.
@@ -154,18 +162,36 @@ Before calculating the Laplacian, a Gaussian blur is applied to remove noise<sup
 
 Original Image | Laplace Output |
 :-------------:|:--------------:|
-<img src="/images/trump.jpg" width="350"/>|<img src="/images/trump_laplacian.jpg" width="350"/>
-
+![chess](images/trump.jpg)|![chess hough](images/trump_laplacian.jpg)
 
 ## Audio Processing
-Ahmet
-### Cross-Correlation
-Ahmet
+Audio processing is one of the sub-branch of signal processing. Audio signals are sound waves and can be represented as analog or digital signals. Digital signal processing methods can be applied to audio signals such as auto-correlation, cross-correlation, etc. Since these two methods are related to convolution, they are explained in this project.
+
+
 ### Auto-Correlation
-Ahmet
+Autocorrelation is the degree of similarity between a signal and a shifted version of the same signal. Therefore, what is done is exactly the same during the cross-correlation but, in auto-correlation signal is being convolved with itself. For continuous signals, auto-correlation can be applied with the given formula below.
+
+<img src="https://latex.codecogs.com/gif.latex?R%28Q%29%20%3D%20%5Cint_%7B-%5Cinfty%7D%5E%7B&plus;%5Cinfty%7D%20f%5E%7B*%7D%28t%29f%28t&plus;Q%29dt" width="351"/>
+
+The concept is the same as the cross-correlation if the shifted version of the signal is similar to the original signal at a certain time, then the positive value is obtained from auto-correlation.
+
+<img src="https://raw.githubusercontent.com/qingkaikong/blog/master/2017_02_intuitive_autocorrelation/figures/autocorrelation_example.gif
+" width="351"/>
+<sub>Image Source: http://qingkaikong.blogspot.com/ </sub>
+
+It can be seen in the figure above, for 0 shifting the autocorrelation is 1 which is the maximum value in the graph and it goes to zero when the correlation is decreased by the time shift.  
+
+
+
+### Cross-Correlation
+Cross-correlation is the similarity measure of two different signals. This method is used in pattern recognition, signal detection, etc. For different two signals, when those two signals are similar to each other for a certain time then positive results are produced by the cross-correlation for this specific time instant. If they are totally different than each other, in this case, 0 can be obtained as a result. In order to calculate the cross-correlation for continuous signals following formula is used.
+
+
+<img src="https://latex.codecogs.com/gif.latex?S%28Q%29%20%3D%20%5Cint_%7B-%5Cinfty%7D%5E%7B&plus;%5Cinfty%7D%20f%5E%7B*%7D%28t%29h%28t&plus;Q%29dt" width="351"/>
+
+Here * donates the complex conjugate however since we will consider the real-time signals, this will not be needed in the application.
 
 ## Artificial Intelligence / Deep Learning
-Ahmet
 
 ### Convolutional Neural Networks
 A convolutional neuronal network (CNN) is a concrete case of Deep Learning neural networks<sup>5</sup>.
@@ -213,14 +239,18 @@ Each CNN contains as many pooling filters as there are convolutional filters:
 
 #### MNIST Database Digits:
 
-<img src="/images/result_mnist_digits_cnn.jpg"/>
+Here, some own written input digits are tested:
 
+![mnist_digits](images/result_mnist_digits_cnn.jpg)
 
-#### MNIST Database Clothing:
-Ahmet
 
 # Showcase
-Armin + Ahmet
+A program whith a graphical user interface which allows the user to input 2 different functions.
+Those functions are then displayed and their convolution is calculated and visualized.
+Furthermore, the user can control the convolution with an interactive slider to better understand the process.
+
+
+![concolver](images/convolver.jpg)
 
 
 ### Sources
