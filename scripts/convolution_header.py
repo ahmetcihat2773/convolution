@@ -12,7 +12,7 @@ from scipy import signal
 from scipy.ndimage.interpolation import shift
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QWidget, QGridLayout,QPushButton, QApplication, QSlider, QCheckBox)
+from PyQt5.QtWidgets import (QWidget, QGridLayout, QPushButton, QApplication, QSlider, QCheckBox, QLineEdit, QMessageBox)
 from PyQt5.QtCore import Qt
 
 
@@ -39,14 +39,13 @@ class MySignal(object):
 class MplCanvas(FigureCanvasQTAgg):
 
 
-    # Layout - 3 Rows, 2 Colums
-
-    #   | Original Time Domain    | Original FFT Linear Spectrum    |
-    #   | Upsampled Time Domain   | Upsampled FFT Linear Spectrum   |  
-    #   | Downsampled Time Domain | Downsampled FFT Linear Spectrum |
-    #   
-    #   | Upsampling Slider       | Downsampling Slider             |
-
+    #  GRID Layout
+    #      1                    3                    6                    9                    20   
+    #      _____________________________________________________________________________________     
+    #   1  | Function 1 Label   | Function 1 Input   | Function 1 Button  | Function 1 Plot    |
+    #   5  | Function 2 Label   | Function 2 Input   | Function 2 Button  | Function 2 Plot    |
+    #   10 |                    | Convolution Label  |                    | Convolution Plot   |
+    #   20 |____________________|____________________|____________________|_Convolution Slider_|
 
     def __init__(self, parent=None, width=5, height=4, dpi=100):
 
@@ -64,33 +63,23 @@ class MplCanvas(FigureCanvasQTAgg):
 
         # The Plots and their formatting
         # PLOT 1
-        self.original_signal_plot = fig.add_subplot(321, title='Original Square Signal')
-        self.original_signal_plot.set_xlabel('t [s]')
-        self.original_signal_plot.set_ylabel('f(t)')
-        self.original_signal_plot.set_ylim(-2.0,2.0)
+        self.fxPlot = fig.add_subplot(311, title='f(x)')
+        self.fxPlot.set_xlabel('t [s]')
+        self.fxPlot.set_ylabel('f(t)')
+        self.fxPlot.set_ylim(0.0,10.0)
         
         # PLOT 2
-        self.original_fft_plot = fig.add_subplot(322, title='Original Linear Spectrum')
+        self.gxPlot = fig.add_subplot(312, title='g(x)')
+        self.gxPlot.set_xlabel('t [s]')
+        self.gxPlot.set_ylabel('f(t)')
+        self.gxPlot.set_ylim(0.0,10.0)
         
         # PLOT 3
-        self.upsampled_signal_plot = fig.add_subplot(323, title='Upsampled Square Signal')
-        self.upsampled_signal_plot.set_xlabel('t [s]')
-        self.upsampled_signal_plot.set_ylabel('f(t)')
-        self.upsampled_signal_plot.set_ylim(-2.0,2.0)
+        self.convolutionPlot = fig.add_subplot(313, title='Convolution of f(x) and g(x)')
+        self.convolutionPlot.set_xlabel('t [s]')
+        self.convolutionPlot.set_ylabel('f(t)')
+        self.convolutionPlot.set_ylim(0.0,10.0)
         
-        # PLOT 4
-        self.upsampled_fft_plot = fig.add_subplot(324, title='Upsampled Linear Spectrum')
-        
-        # PLOT 5
-        self.downsampled_signal_plot = fig.add_subplot(325, title='Downsampled Square Signal')
-        self.downsampled_signal_plot.set_xlabel('t [s]')
-        self.downsampled_signal_plot.set_ylabel('f(t)')
-        self.downsampled_signal_plot.set_ylim(-2.0,2.0)
-        
-        # PLOT 6
-        self.downsampled_fft_plot = fig.add_subplot(326, title='Downsampled Linear Spectrum')
-
-
         super(MplCanvas, self).__init__(fig)
 
 
@@ -115,107 +104,74 @@ class MainWindow(QWidget):
         # Define the Plot with its subplots
         self.canvas = MplCanvas(self, width=5, height=4, dpi=100)
 
-        # Create checkboxes
-        self.upsampleCheckBox = QCheckBox("Upsampling")
-        self.downsampleCheckBox = QCheckBox("Downsampling")
-        self.upsampleCheckBox.setChecked(False)
-        self.downsampleCheckBox.setChecked(False)
-        self.upsampleCheckBox.stateChanged.connect(self.upsamplingCheckboxAction)
-        self.downsampleCheckBox.stateChanged.connect(self.downsamplingCheckboxAction)
-
-
         # Create a slider
-        self.upsample_slider = QSlider(Qt.Horizontal)
-        self.upsample_slider.setRange(0,10)
-        self.upsample_slider.setSingleStep(1)
-        self.upsample_slider.setValue(1)
-        self.upsample_slider.setTickInterval(1)
-        self.upsample_slider.setTickPosition(QSlider.TicksBothSides)
+        self.convolutionSlider = QSlider(Qt.Horizontal)
+        self.convolutionSlider.setRange(0,10)               # maximum range is signal lenght * 2 ?
+        self.convolutionSlider.setSingleStep(1) 
+        self.convolutionSlider.setValue(1)
+        self.convolutionSlider.setTickInterval(1)
+        self.convolutionSlider.setTickPosition(QSlider.TicksBothSides)
 
-        # Create a slider
-        self.downsample_slider = QSlider(Qt.Horizontal)
-        self.downsample_slider.setRange(0,10)
-        self.downsample_slider.setSingleStep(1)
-        self.downsample_slider.setValue(1)
-        self.downsample_slider.setTickInterval(1)
-        self.downsample_slider.setTickPosition(QSlider.TicksBothSides)
+            
+        # Creat Buttons
+        self.fxButton = QPushButton('Set', self)
+        self.gxButton = QPushButton('Set', self)
 
         # Create Labels
-        self.downsampleLabel = QtWidgets.QLabel()
-        self.downsampleLabel.setText('Status: INACTIVE')
-        self.upsampleLabel = QtWidgets.QLabel()
-        self.upsampleLabel.setText('Status: INACTIVE')
+        self.fxLabel = QtWidgets.QLabel()
+        self.fxLabel.setText('Type in a function f(x):')
+        self.gxLabel = QtWidgets.QLabel()
+        self.gxLabel.setText('Type in a function g(x):')
+
+        # Create Textboxes
+        self.fxInput = QLineEdit(self)
+        self.gxInput = QLineEdit(self)
 
         # Connect the sliders to our plots - if the slider value changes, the plot is updated
-        self.upsample_slider.valueChanged[int].connect(self.upsamplePlot)
-        self.downsample_slider.valueChanged[int].connect(self.downsamplePlot)
+        self.convolutionSlider.valueChanged[int].connect(self.upsamplePlot)
 
-        # Layout - 3 Rows, 2 Colums
-
-        #   | Original Time Domain      | Original FFT Linear Spectrum    |
-        #   | Upsampled Time Domain     | Upsampled FFT Linear Spectrum   |  
-        #   | Downsampled Time Domain   | Downsampled FFT Linear Spectrum |
-        #   
-        #   | Upsampling Checkbox       | Upsampling Slider               |
-        #   | Upsampling Status         | Upsampling Slider               |
-        #   | Downsampling Checkbox     | Downsampling Slider             |
-        #   | Downsampling Status       | Downsampling Slider             |
+        # Connect the Buttons to the input reading functions
+        self.fxButton.clicked.connect(self.readFx)
+        self.gxButton.clicked.connect(self.readGx)
 
 
-        # Create a Grid Layout and put the single widgets into it
-        #   | Original Time Domain    | Original FFT Linear Spectrum      |   
-        #   | Upsampled Time Domain   | Upsampled FFT Linear Spectrum     | 
-        #   | Downsampled Time Domain | Downsampled FFT Linear Spectrum   | 
-        grid_layout.addWidget(self.canvas, 1,1,12,10) # span over 12 rows and 10 columns
-        
-        #   | Upsampling Checkbox       | Upsampling Slider               |
-        #   | Upsampling Status         | Upsampling Slider               |
-        grid_layout.addWidget(self.upsampleCheckBox, 13,1,1,1)
-        grid_layout.addWidget(self.upsampleLabel, 14,1,1,1)
-        grid_layout.addWidget(self.upsample_slider, 13,2,2,9)     
-        
-        #   | Downsampling Checkbox     | Downsampling Slider             |
-        #   | Downsampling Status       | Downsampling Slider             |
-        grid_layout.addWidget(self.downsampleLabel, 15,1,1,1)
-        grid_layout.addWidget(self.downsampleCheckBox, 16,1,1,1)
-        grid_layout.addWidget(self.downsample_slider, 15,2,2,9)
+        #  GRID Layout
+        #      1                    3                    6                    9                    20   
+        #      _____________________________________________________________________________________     
+        #   1  | Function 1 Label   | Function 1 Input   | Function 1 Button  | Function 1 Plot    |
+        #   5  | Function 2 Label   | Function 2 Input   | Function 2 Button  | Function 2 Plot    |
+        #   10 |                    | Convolution Label  |                    | Convolution Plot   |
+        #   20 |____________________|____________________|____________________|_Convolution Slider_|
+
+        # Lets make 20 Columns and 20 Rows
+        grid_layout.addWidget(self.fxLabel, 3,1,1,2)
+        grid_layout.addWidget(self.fxInput, 3,3,1,2)
+        grid_layout.addWidget(self.fxButton, 3,6,1,2)
+        grid_layout.addWidget(self.gxLabel, 9,1,1,2)
+        grid_layout.addWidget(self.gxInput, 9,3,1,2)
+        grid_layout.addWidget(self.gxButton, 9,6,1,2)
+        grid_layout.addWidget(self.canvas, 1,9,19,11) # start from row=1, column=9, span over 19 rows and 11 columns
+        grid_layout.addWidget(self.convolutionSlider, 20,9,1,11)     
 
        
         # A dictionary where our functions are stored
         self.plot_refs = dict()
         self.signals = dict()
 
-        # Initial Values for checkboxes
-        self.activateUpsampling = False
-        self.activateDownsampling = False
-
         self.show()
 
 
-    # Upsampling Checkbox Function
-    def upsamplingCheckboxAction(self, state):
-        if (Qt.Checked == state):
-            # activate upsampling
-            self.activateUpsampling = True
-            self.upsampleLabel.setText('Status: ACTIVE')
-        else: 
-            # deactivate upsampling
-            self.activateUpsampling = False
-            self.upsampleLabel.setText('Status: INACTIVE')
-            self.upsamplePlot(1)
+    # Function reader
+    def readFx(self):
+        functionValue = self.fxInput.text()
+        QMessageBox.question(self, 'f(x)', "f(x): " + functionValue, QMessageBox.Ok, QMessageBox.Ok)
+        self.fxInput.setText("")
 
-
-    # Downsampling Checkbox Function
-    def downsamplingCheckboxAction(self, state):
-        if (Qt.Checked == state):
-            # activate downsampling
-            self.activateDownsampling = True
-            self.downsampleLabel.setText('Status: ACTIVE')
-        else: 
-            # deactivate downsampling
-            self.activateDownsampling = False
-            self.downsampleLabel.setText('Status: INACTIVE')
-            self.downsamplePlot(1)
+    # Function reader
+    def readGx(self):
+        functionValue = self.gxInput.text()
+        QMessageBox.question(self, 'g(x)', "g(x): " + functionValue, QMessageBox.Ok, QMessageBox.Ok)
+        self.gxInput.setText("")
 
 
     # Add a function to our plots
@@ -224,7 +180,7 @@ class MainWindow(QWidget):
         newSignal = MySignal(y, x, color, f_s, length)
 
         # SIGNAL - Add plot reference to our List of plot refs
-        self.plot_refs[name] = self.canvas.original_signal_plot.plot(newSignal.y,
+        self.plot_refs[name] = self.canvas.fxPlot.plot(newSignal.y,
                                                 newSignal.x,
                                                 newSignal.color) 
         # And add the functions to our extra list
@@ -293,7 +249,7 @@ class MainWindow(QWidget):
         if self.plot_refs.get('upsampled square signal') is None:
 
             # Add SIGNAL plot reference to our List of plot_refs
-            self.plot_refs['upsampled square signal'] = self.canvas.upsampled_signal_plot.plot(upsampledSignal.y,
+            self.plot_refs['upsampled square signal'] = self.canvas.gxPlot.plot(upsampledSignal.y,
                                                     upsampledSignal.x,
                                                     upsampledSignal.color) 
 
@@ -383,7 +339,7 @@ class MainWindow(QWidget):
             if self.plot_refs.get('downsampled square signal') is None:
 
                 # Add SIGNAL plot reference to our List of plot_refs
-                self.plot_refs['downsampled square signal'] = self.canvas.downsampled_signal_plot.plot(downsampledSignal.y,
+                self.plot_refs['downsampled square signal'] = self.canvas.convolutionPlot.plot(downsampledSignal.y,
                                                         downsampledSignal.x,
                                                         downsampledSignal.color) 
 
@@ -407,8 +363,6 @@ class MainWindow(QWidget):
             
             # Trigger the canvas to downdate and redraw.
             self.canvas.draw()
-
-
 
 
 
