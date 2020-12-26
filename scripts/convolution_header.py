@@ -39,13 +39,17 @@ class MySignal(object):
 class MplCanvas(FigureCanvasQTAgg):
 
 
-    #  GRID Layout
-    #      1                    3                    6                    9                    20   
-    #      _____________________________________________________________________________________     
-    #   1  | Function 1 Label   | Function 1 Input   | Function 1 Button  | Function 1 Plot    |
-    #   5  | Function 2 Label   | Function 2 Input   | Function 2 Button  | Function 2 Plot    |
-    #   10 |                    | Convolution Label  |                    | Convolution Plot   |
-    #   20 |____________________|____________________|____________________|_Convolution Slider_|
+        #  GRID Layout
+        #      1                              6                        12                          18
+        #      _____________________________________________________________________________________     
+        #    1 |                                    f(x) Plot                                       | 
+        #      |                                    g(x) PLot                                       |
+        #   14 |                                Convolution PLot                                    |
+        #   15 |                               Convolution Slider                                   |
+        #   16 | f(x) Dropbox (Function Type) | f(x) Slider Amplitude  | f(x) Slider Frequency      |
+        #   17 | g(x) Dropbox (Function Type) | g(x) Slider Amplitude  | g(x) Slider Frequency      |
+        #   18 |____________________________________________________________________________________|
+
 
     def __init__(self, parent=None, width=5, height=4, dpi=100):
 
@@ -136,22 +140,29 @@ class MainWindow(QWidget):
 
 
         #  GRID Layout
-        #      1                    3                    6                    9                    20   
+        #      1                              6                        12                          18
         #      _____________________________________________________________________________________     
-        #   1  | Function 1 Label   | Function 1 Input   | Function 1 Button  | Function 1 Plot    |
-        #   5  | Function 2 Label   | Function 2 Input   | Function 2 Button  | Function 2 Plot    |
-        #   10 |                    | Convolution Label  |                    | Convolution Plot   |
-        #   20 |____________________|____________________|____________________|_Convolution Slider_|
+        #    1 |                                    f(x) Plot                                       | 
+        #      |                                    g(x) PLot                                       |
+        #   14 |                                Convolution PLot                                    |
+        #   15 |                               Convolution Slider                                   |
+        #   16 | f(x) Dropbox (Function Type) | f(x) Slider Amplitude  | f(x) Slider Frequency      |
+        #   17 | g(x) Dropbox (Function Type) | g(x) Slider Amplitude  | g(x) Slider Frequency      |
+        #   18 |____________________________________________________________________________________|
+
+
 
         # Lets make 20 Columns and 20 Rows
-        grid_layout.addWidget(self.fxLabel, 3,1,1,2)
-        grid_layout.addWidget(self.fxInput, 3,3,1,2)
-        grid_layout.addWidget(self.fxButton, 3,6,1,2)
-        grid_layout.addWidget(self.gxLabel, 9,1,1,2)
-        grid_layout.addWidget(self.gxInput, 9,3,1,2)
-        grid_layout.addWidget(self.gxButton, 9,6,1,2)
-        grid_layout.addWidget(self.canvas, 1,9,19,11) # start from row=1, column=9, span over 19 rows and 11 columns
-        grid_layout.addWidget(self.convolutionSlider, 20,9,1,11)     
+        grid_layout.addWidget(self.fxLabel, 3,1,1,2) # start from row=3, column=1, span over 1 row and 2 columns
+
+        grid_layout.addWidget(self.fxInput, 3,3,1,2)    #  dropbox
+        grid_layout.addWidget(self.fxButton, 3,6,1,2)   #  slider amp
+        grid_layout.addWidget(self.gxLabel, 9,1,1,2)    #  slider freq
+        grid_layout.addWidget(self.gxInput, 9,3,1,2)    #
+        grid_layout.addWidget(self.gxButton, 9,6,1,2)   #
+
+        grid_layout.addWidget(self.canvas, 1,1,14,18) # start from row=1, column=1, span over 14 rows and 18 columns
+        grid_layout.addWidget(self.convolutionSlider, 15,1,1,18)     
 
        
         # A dictionary where our functions are stored
