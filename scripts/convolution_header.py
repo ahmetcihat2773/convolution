@@ -159,7 +159,7 @@ class MainWindow(QWidget):
         grid_layout.addWidget(self.fxButton, 3,6,1,2)   #  slider amp
         grid_layout.addWidget(self.gxLabel, 9,1,1,2)    #  slider freq
         grid_layout.addWidget(self.gxInput, 9,3,1,2)    #
-        grid_layout.addWidget(self.gxButton, 9,6,1,2)   #
+        grid_layout.addWidget(self.gxButton, 9,6,1,2)   # s
 
         grid_layout.addWidget(self.canvas, 1,1,14,18) # start from row=1, column=1, span over 14 rows and 18 columns
         grid_layout.addWidget(self.convolutionSlider, 15,1,1,18)     
