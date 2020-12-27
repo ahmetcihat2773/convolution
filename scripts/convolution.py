@@ -28,3 +28,15 @@ mainWindow = MainWindow()
 #mainWindow.addFunction(t, x, 'r', 'square signal', fs, length)
 
 app.exec_()
+
+
+# Checkboxes
+# Frequency
+# Amplitude
+# Triangle
+# Sine
+# Cosine
+# Square   
+
+# from scipy import signal
+# pwm = signal.square(2 * np.pi * f * t, 0.5)
