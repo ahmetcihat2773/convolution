@@ -51,7 +51,7 @@ class MplCanvas(FigureCanvasQTAgg):
         #   18 |____________________________________________________________________________________|
 
 
-    def __init__(self, parent=None, width=5, height=4, dpi=100):
+    def __init__(self, parent=None, width=6, height=5, dpi=100):
 
         # Plot and its title
         fig = Figure(figsize=(width, height), dpi=dpi,tight_layout=True)
@@ -67,22 +67,21 @@ class MplCanvas(FigureCanvasQTAgg):
 
         # The Plots and their formatting
         # PLOT 1
-        self.fxPlot = fig.add_subplot(311, title='f(x)')
-        self.fxPlot.set_xlabel('t [s]')
-        self.fxPlot.set_ylabel('f(t)')
+        self.fxPlot = fig.add_subplot(311, title='First input-signal')
+        self.fxPlot.set_xlabel('x [s]')
+        self.fxPlot.set_ylabel('f(x)')
         self.fxPlot.set_ylim(0.0,10.0)
         
         # PLOT 2
-        self.gxPlot = fig.add_subplot(312, title='g(x)')
-        self.gxPlot.set_xlabel('t [s]')
-        self.gxPlot.set_ylabel('f(t)')
+        self.gxPlot = fig.add_subplot(312, title='Second input-signal')
+        self.gxPlot.set_xlabel('x [s]')
+        self.gxPlot.set_ylabel('f(x)')
         self.gxPlot.set_ylim(0.0,10.0)
         
         # PLOT 3
         self.convolutionPlot = fig.add_subplot(313, title='Convolution of f(x) and g(x)')
-        self.convolutionPlot.set_xlabel('tau')
-        self.convolutionPlot.set_ylabel('f(t)')
-        self.convolutionPlot.set_xlim(-2,2)
+        self.convolutionPlot.set_xlabel('\u03C4 [s]')
+        self.convolutionPlot.set_ylabel('f(x) * g(x)')
         
         super(MplCanvas, self).__init__(fig)
 
@@ -116,11 +115,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.convolutionSlider.valueChanged.connect(self.convolutionUpdater)
         self.fxAmpSlider = self.createSlider(0,10,1,0)
         self.fxAmpSlider.valueChanged.connect(self.fxAmpUpdater)
-        self.fxFreqSlider = self.createSlider(0,10,1,0)
+        self.fxFreqSlider = self.createSlider(0,10,1,1)
         self.fxFreqSlider.valueChanged.connect(self.fxFreqUpdater)
         self.gxAmpSlider = self.createSlider(0,10,1,0)
         self.gxAmpSlider.valueChanged.connect(self.gxAmpUpdater)
-        self.gxFreqSlider = self.createSlider(0,10,1,0)
+        self.gxFreqSlider = self.createSlider(0,10,1,1)
         self.gxFreqSlider.valueChanged.connect(self.gxFreqUpdater)
        
         # Dropboxes
@@ -145,7 +144,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fxAmpLabel.setText('Amplitude: ')
         self.fxAmpLabel.setStyleSheet("padding :5px") 
         self.fxAmpSliderValueLabel = QtWidgets.QLabel()
-        self.fxAmpSliderValueLabel.setText('1')
+        self.fxAmpSliderValueLabel.setText('0')
         self.fxAmpSliderValueLabel.setFixedSize(20, 20)
         self.fxFreqLabel = QtWidgets.QLabel()
         self.fxFreqLabel.setText('Frequency [Hz]: ')
@@ -160,7 +159,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.gxAmpLabel.setText('Amplitude: ')
         self.gxAmpLabel.setStyleSheet("padding :5px") 
         self.gxAmpSliderValueLabel = QtWidgets.QLabel()
-        self.gxAmpSliderValueLabel.setText('1')
+        self.gxAmpSliderValueLabel.setText('0')
         self.gxAmpSliderValueLabel.setFixedSize(20, 20)
         self.gxFreqLabel = QtWidgets.QLabel()
         self.gxFreqLabel.setText('Frequency [Hz]: ')
@@ -257,18 +256,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # SIGNAL - Add plot reference to our List of plot refs
         self.plot_refs['fx'] = self.canvas.fxPlot.plot(self.x, self.fx, 'b') 
-        self.plot_refs['gx'] = self.canvas.gxPlot.plot(self.x, self.gx, 'b') 
+        self.plot_refs['gx'] = self.canvas.gxPlot.plot(self.x, self.gx, 'g') 
         self.t_fx = np.linspace(0,self.fLength,len(self.fx))
         self.t_gx = np.linspace(-1,0,len(self.gx))
         self.canvas.convolutionPlot.plot(self.t_fx,self.fx,'b')
         self.canvas.convolutionPlot.plot(self.t_gx,self.gx,'g')
-        self.canvas.convolutionPlot.set_xlim(-2,2)
 
         # Set Plot limits
         self.canvas.fxPlot.set_ylim(-11,11)
         self.canvas.gxPlot.set_ylim(-11,11)
-        
-
+        self.canvas.convolutionPlot.set_xlim(-2,3)
+        self.canvas.convolutionPlot.set_ylim(-21,21)
+     
         self.show()
 
 
@@ -283,12 +282,18 @@ class MainWindow(QtWidgets.QMainWindow):
             self.fx = self.fxAmp * signal.sawtooth(2 * np.pi * self.fxFreq * self.x, 0.5)
         elif value == 'Sawtooth':
             self.fx = self.fxAmp * signal.sawtooth(2 * np.pi * self.fxFreq * self.x, 1)
+
         # change our plots
         self.canvas.convolutionPlot.clear()
         self.plot_refs['fx'][0].set_ydata(self.fx)
+        self.canvas.convolutionPlot.set_title('Convolution of f(x) and g(x)')
+        self.canvas.convolutionPlot.set_xlabel('\u03C4 [s]')
+        self.canvas.convolutionPlot.set_ylabel('f(x) * g(x)')
         self.canvas.convolutionPlot.plot(self.t_fx,self.fx,'b')
         self.canvas.convolutionPlot.plot(self.t_gx,self.gx,'g')
-        self.canvas.convolutionPlot.set_xlim(-2,2)
+        self.canvas.convolutionPlot.set_xlim(-2,3)
+        self.canvas.convolutionPlot.set_ylim(-21,21)
+
         # Trigger the canvas to update and redraw.
         self.canvas.draw()
         # Update colvolution with new signal
@@ -306,12 +311,17 @@ class MainWindow(QtWidgets.QMainWindow):
             self.gx = self.gxAmp * signal.sawtooth(2 * np.pi * self.gxFreq * self.x, 0.5)
         elif value == 'Sawtooth':
             self.gx = self.gxAmp * signal.sawtooth(2 * np.pi * self.gxFreq * self.x, 1)
+
         # change our plots
         self.canvas.convolutionPlot.clear()
         self.plot_refs['gx'][0].set_ydata(self.gx) 
+        self.canvas.convolutionPlot.set_title('Convolution of f(x) and g(x)')
+        self.canvas.convolutionPlot.set_xlabel('\u03C4 [s]')
+        self.canvas.convolutionPlot.set_ylabel('f(x) * g(x)')
         self.canvas.convolutionPlot.plot(self.t_gx,self.gx,'g')
         self.canvas.convolutionPlot.plot(self.t_fx,self.fx,'b')
-        self.canvas.convolutionPlot.set_xlim(-2,2)
+        self.canvas.convolutionPlot.set_xlim(-2,3)
+        self.canvas.convolutionPlot.set_ylim(-21,21)
 
 
         # Trigger the canvas to update and redraw.
@@ -323,33 +333,45 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_convol(self):
         self.conv = signal.convolve(self.fx,self.gx)
         self.conv = self.conv/len(self.conv)        
+
     # Function for the convolution slider
     def convolutionUpdater(self, value):
+
         value = value/10
         self.update_convol()
         self.canvas.convolutionPlot.clear()
         self.convolutionSliderValueLabel.setText(str(value))
        
         if value >=-1 and value <=1:
+
             if value < 0:
                 till = int(round((1+value),1)*self.fs)
                 t = np.linspace(-1,value,len(self.conv[:till]))
                 self.canvas.convolutionPlot.plot(t,self.conv[:till],'r')
+
             elif value >0:
                 till = int(len(self.conv)/2)+int(value*self.fs)
                 t = np.linspace(-1,value,len(self.conv[:till]))
                 self.canvas.convolutionPlot.plot(t,self.conv[:till],'r')
+
             else:
                 t = np.linspace(-1,0,int(len(self.conv)/2))
                 self.canvas.convolutionPlot.plot(t,self.conv[:int(len(self.conv)/2)],'r')
+
         if value >1:
             t = np.linspace(-1,1,len(self.conv))
             self.canvas.convolutionPlot.plot(t,self.conv,'r')
+
         t_test = np.linspace(-1,1,len(self.conv))
         t_gx = np.linspace(value,value+1,len(self.gx))
         self.canvas.convolutionPlot.plot(self.t_fx,self.fx,'b')
         self.canvas.convolutionPlot.plot(t_gx,self.gx,'g')
-        self.canvas.convolutionPlot.set_xlim(-2,2)
+        self.canvas.convolutionPlot.set_title('Convolution of f(x) and g(x)')
+        self.canvas.convolutionPlot.set_xlabel('\u03C4 [s]')
+        self.canvas.convolutionPlot.set_ylabel('f(x) * g(x)')
+        self.canvas.convolutionPlot.set_xlim(-2,3)
+        self.canvas.convolutionPlot.set_ylim(-21,21)
+
         self.canvas.draw()
        
     # Change amplitude of fx

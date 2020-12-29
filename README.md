@@ -245,9 +245,10 @@ Here, some own written input digits are tested:
 
 
 # Showcase
-A program whith a graphical user interface which allows the user to input 2 different functions.
-Those functions are then displayed and their convolution is calculated and visualized.
-Furthermore, the user can control the convolution with an interactive slider to better understand the process.
+This program has a graphical user interface which allows the user to choose 2 different input functions.
+Both functions can be altered in terms of amplitude, frequency and waveform using the sliders and dropdown menus.
+The user can then control the convolution of both functions with an interactive slider to better understand the process.
+The convolution is calculated and visualized.
 
 
 ![concolver](images/convolver.jpg)

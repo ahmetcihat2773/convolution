@@ -5,7 +5,7 @@ import numpy as np
 from PyQt5.QtWidgets import QApplication
 
 # MAIN
-# Our Application
+# Our Application 
 app = QtWidgets.QApplication(sys.argv)
 mainWindow = MainWindow()
 
