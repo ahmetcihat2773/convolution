@@ -260,8 +260,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.plot_refs['gx'] = self.canvas.gxPlot.plot(self.x, self.gx, 'b') 
         self.t_fx = np.linspace(0,self.fLength,len(self.fx))
         self.t_gx = np.linspace(-1,0,len(self.gx))
-        self.canvas.convolutionPlot.plot(self.t_fx,self.fx)
-        self.canvas.convolutionPlot.plot(self.t_gx,self.gx)
+        self.canvas.convolutionPlot.plot(self.t_fx,self.fx,'b')
+        self.canvas.convolutionPlot.plot(self.t_gx,self.gx,'g')
         self.canvas.convolutionPlot.set_xlim(-2,2)
 
         # Set Plot limits
@@ -274,6 +274,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # Chosen Function WaveForm from Dropbox
     def fxWaveFormUpdater(self, value):
+        self.convolutionSlider.setValue(-10)
         if value == 'Sine':
             self.fx = self.fxAmp * np.sin(2 * np.pi * self.fxFreq * self.x)
         elif value == 'Square':
@@ -285,8 +286,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # change our plots
         self.canvas.convolutionPlot.clear()
         self.plot_refs['fx'][0].set_ydata(self.fx)
-        self.canvas.convolutionPlot.plot(self.t_fx,self.fx)
-        self.canvas.convolutionPlot.plot(self.t_gx,self.gx)
+        self.canvas.convolutionPlot.plot(self.t_fx,self.fx,'b')
+        self.canvas.convolutionPlot.plot(self.t_gx,self.gx,'g')
         self.canvas.convolutionPlot.set_xlim(-2,2)
         # Trigger the canvas to update and redraw.
         self.canvas.draw()
@@ -296,6 +297,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # Chosen Function WaveForm from Dropbox
     def gxWaveFormUpdater(self, value):
+        self.convolutionSlider.setValue(-10)
         if value == 'Sine':
             self.gx = self.gxAmp * np.sin(2 * np.pi * self.gxFreq * self.x)
         elif value == 'Square':
@@ -307,8 +309,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # change our plots
         self.canvas.convolutionPlot.clear()
         self.plot_refs['gx'][0].set_ydata(self.gx) 
-        self.canvas.convolutionPlot.plot(self.t_gx,self.gx)
-        self.canvas.convolutionPlot.plot(self.t_fx,self.fx)
+        self.canvas.convolutionPlot.plot(self.t_gx,self.gx,'g')
+        self.canvas.convolutionPlot.plot(self.t_fx,self.fx,'b')
         self.canvas.convolutionPlot.set_xlim(-2,2)
 
 
@@ -332,30 +334,24 @@ class MainWindow(QtWidgets.QMainWindow):
             if value < 0:
                 till = int(round((1+value),1)*self.fs)
                 t = np.linspace(-1,value,len(self.conv[:till]))
-                self.canvas.convolutionPlot.plot(t,self.conv[:till])
+                self.canvas.convolutionPlot.plot(t,self.conv[:till],'r')
             elif value >0:
                 till = int(len(self.conv)/2)+int(value*self.fs)
                 t = np.linspace(-1,value,len(self.conv[:till]))
-                self.canvas.convolutionPlot.plot(t,self.conv[:till])
+                self.canvas.convolutionPlot.plot(t,self.conv[:till],'r')
             else:
                 t = np.linspace(-1,0,int(len(self.conv)/2))
-                self.canvas.convolutionPlot.plot(t,self.conv[:int(len(self.conv)/2)])
-
-
-            
-        #t = np.linspace(-self.fLength,self.fLength,len(self.conv))
-        #self.canvas.convolutionPlot.plot(t_fx,self.fx)
-        
+                self.canvas.convolutionPlot.plot(t,self.conv[:int(len(self.conv)/2)],'r')
+        if value >1:
+            t = np.linspace(-1,1,len(self.conv))
+            self.canvas.convolutionPlot.plot(t,self.conv,'r')
+        t_test = np.linspace(-1,1,len(self.conv))
         t_gx = np.linspace(value,value+1,len(self.gx))
-        self.canvas.convolutionPlot.plot(self.t_fx,self.fx)
-        self.canvas.convolutionPlot.plot(t_gx,self.gx)
+        self.canvas.convolutionPlot.plot(self.t_fx,self.fx,'b')
+        self.canvas.convolutionPlot.plot(t_gx,self.gx,'g')
         self.canvas.convolutionPlot.set_xlim(-2,2)
         self.canvas.draw()
-        
-        # self.plot_refs['convolution'][0].set_ydata()
-        # plot 3 functions in one plot pyqt5 matplotlib, maybe with different colors
-        # fx, gx, and convolution of both
-        
+       
     # Change amplitude of fx
     def fxAmpUpdater(self, value):
         self.fxAmpSliderValueLabel.setText(str(value))
