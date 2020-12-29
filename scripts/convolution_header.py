@@ -15,7 +15,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QWidget, QGridLayout, QPushButton, QApplication, QSlider, QCheckBox, QLineEdit, QMessageBox)
 from PyQt5.QtCore import Qt
 from scipy import signal
-
+import matplotlib.pyplot as plt
 
 
 # Saves a Signal and its parameters
@@ -80,9 +80,9 @@ class MplCanvas(FigureCanvasQTAgg):
         
         # PLOT 3
         self.convolutionPlot = fig.add_subplot(313, title='Convolution of f(x) and g(x)')
-        self.convolutionPlot.set_xlabel('t [s]')
+        self.convolutionPlot.set_xlabel('tau')
         self.convolutionPlot.set_ylabel('f(t)')
-        self.convolutionPlot.set_ylim(0.0,10.0)
+        self.convolutionPlot.set_xlim(-2,2)
         
         super(MplCanvas, self).__init__(fig)
 
@@ -112,15 +112,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.mainWindow.addWidget(self.canvas,stretch=5)
 
         # Sliders
-        self.convolutionSlider = self.createSlider(0,10,0)
+        self.convolutionSlider = self.createSlider(-20,20,1,-10)
         self.convolutionSlider.valueChanged.connect(self.convolutionUpdater)
-        self.fxAmpSlider = self.createSlider(0,10,1)
+        self.fxAmpSlider = self.createSlider(0,10,1,0)
         self.fxAmpSlider.valueChanged.connect(self.fxAmpUpdater)
-        self.fxFreqSlider = self.createSlider(0,10,1)
+        self.fxFreqSlider = self.createSlider(0,10,1,0)
         self.fxFreqSlider.valueChanged.connect(self.fxFreqUpdater)
-        self.gxAmpSlider = self.createSlider(0,10,1)
+        self.gxAmpSlider = self.createSlider(0,10,1,0)
         self.gxAmpSlider.valueChanged.connect(self.gxAmpUpdater)
-        self.gxFreqSlider = self.createSlider(0,10,1)
+        self.gxFreqSlider = self.createSlider(0,10,1,0)
         self.gxFreqSlider.valueChanged.connect(self.gxFreqUpdater)
        
         # Dropboxes
@@ -244,11 +244,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.fxFreq = 1
         self.fxAmp = 0
-        fx = np.ones(self.fs * self.fLength)
+        self.fx = np.ones(self.fs * self.fLength)
 
         self.gxFreq = 1
         self.gxAmp = 0
-        gx = np.ones(self.fs * self.fLength)
+        self.gx = np.ones(self.fs * self.fLength)
 
 
         self.hxFreq = 1
@@ -256,14 +256,18 @@ class MainWindow(QtWidgets.QMainWindow):
         convolution_x = np.ones(self.fs * self.fLength)
 
         # SIGNAL - Add plot reference to our List of plot refs
-        self.plot_refs['fx'] = self.canvas.fxPlot.plot(self.x, fx, 'b') 
-        self.plot_refs['gx'] = self.canvas.gxPlot.plot(self.x, gx, 'b') 
-        self.plot_refs['convolution'] = self.canvas.convolutionPlot.plot(self.x, convolution_x, 'b')  
+        self.plot_refs['fx'] = self.canvas.fxPlot.plot(self.x, self.fx, 'b') 
+        self.plot_refs['gx'] = self.canvas.gxPlot.plot(self.x, self.gx, 'b') 
+        self.t_fx = np.linspace(0,self.fLength,len(self.fx))
+        self.t_gx = np.linspace(-1,0,len(self.gx))
+        self.canvas.convolutionPlot.plot(self.t_fx,self.fx)
+        self.canvas.convolutionPlot.plot(self.t_gx,self.gx)
+        self.canvas.convolutionPlot.set_xlim(-2,2)
 
         # Set Plot limits
         self.canvas.fxPlot.set_ylim(-11,11)
         self.canvas.gxPlot.set_ylim(-11,11)
-        self.canvas.convolutionPlot.set_ylim(-11,11)
+        
 
         self.show()
 
@@ -271,46 +275,87 @@ class MainWindow(QtWidgets.QMainWindow):
     # Chosen Function WaveForm from Dropbox
     def fxWaveFormUpdater(self, value):
         if value == 'Sine':
-            fx = self.fxAmp * np.sin(2 * np.pi * self.fxFreq * self.x)
+            self.fx = self.fxAmp * np.sin(2 * np.pi * self.fxFreq * self.x)
         elif value == 'Square':
-            fx = self.fxAmp * signal.square(2 * np.pi * self.fxFreq * self.x, 0.5)
+            self.fx = self.fxAmp * signal.square(2 * np.pi * self.fxFreq * self.x, 0.5)
         elif value == 'Triangle':
-            fx = self.fxAmp * signal.sawtooth(2 * np.pi * self.fxFreq * self.x, 0.5)
+            self.fx = self.fxAmp * signal.sawtooth(2 * np.pi * self.fxFreq * self.x, 0.5)
         elif value == 'Sawtooth':
-            fx = self.fxAmp * signal.sawtooth(2 * np.pi * self.fxFreq * self.x, 1)
-
+            self.fx = self.fxAmp * signal.sawtooth(2 * np.pi * self.fxFreq * self.x, 1)
         # change our plots
-        self.plot_refs['fx'][0].set_ydata(fx)
-
+        self.canvas.convolutionPlot.clear()
+        self.plot_refs['fx'][0].set_ydata(self.fx)
+        self.canvas.convolutionPlot.plot(self.t_fx,self.fx)
+        self.canvas.convolutionPlot.plot(self.t_gx,self.gx)
+        self.canvas.convolutionPlot.set_xlim(-2,2)
         # Trigger the canvas to update and redraw.
         self.canvas.draw()
+        # Update colvolution with new signal
+        self.update_convol()
 
 
     # Chosen Function WaveForm from Dropbox
     def gxWaveFormUpdater(self, value):
         if value == 'Sine':
-            gx = self.gxAmp * np.sin(2 * np.pi * self.gxFreq * self.x)
+            self.gx = self.gxAmp * np.sin(2 * np.pi * self.gxFreq * self.x)
         elif value == 'Square':
-            gx = self.gxAmp * signal.square(2 * np.pi * self.gxFreq * self.x, 0.5)
+            self.gx = self.gxAmp * signal.square(2 * np.pi * self.gxFreq * self.x, 0.5)
         elif value == 'Triangle':
-            gx = self.gxAmp * signal.sawtooth(2 * np.pi * self.gxFreq * self.x, 0.5)
+            self.gx = self.gxAmp * signal.sawtooth(2 * np.pi * self.gxFreq * self.x, 0.5)
         elif value == 'Sawtooth':
-            gx = self.gxAmp * signal.sawtooth(2 * np.pi * self.gxFreq * self.x, 1)
-
+            self.gx = self.gxAmp * signal.sawtooth(2 * np.pi * self.gxFreq * self.x, 1)
         # change our plots
-        self.plot_refs['gx'][0].set_ydata(gx) 
+        self.canvas.convolutionPlot.clear()
+        self.plot_refs['gx'][0].set_ydata(self.gx) 
+        self.canvas.convolutionPlot.plot(self.t_gx,self.gx)
+        self.canvas.convolutionPlot.plot(self.t_fx,self.fx)
+        self.canvas.convolutionPlot.set_xlim(-2,2)
+
 
         # Trigger the canvas to update and redraw.
         self.canvas.draw()
 
+        # Update colvolution with new signal
+        self.update_convol()
+
+    def update_convol(self):
+        self.conv = signal.convolve(self.fx,self.gx)
+        self.conv = self.conv/len(self.conv)        
     # Function for the convolution slider
     def convolutionUpdater(self, value):
-        self.convolutionSliderValueLabel.setText(str(value
-                                                        
+        value = value/10
+        self.update_convol()
+        self.canvas.convolutionPlot.clear()
+        self.convolutionSliderValueLabel.setText(str(value))
+       
+        if value >=-1 and value <=1:
+            if value < 0:
+                till = int(round((1+value),1)*self.fs)
+                t = np.linspace(-1,value,len(self.conv[:till]))
+                self.canvas.convolutionPlot.plot(t,self.conv[:till])
+            elif value >0:
+                till = int(len(self.conv)/2)+int(value*self.fs)
+                t = np.linspace(-1,value,len(self.conv[:till]))
+                self.canvas.convolutionPlot.plot(t,self.conv[:till])
+            else:
+                t = np.linspace(-1,0,int(len(self.conv)/2))
+                self.canvas.convolutionPlot.plot(t,self.conv[:int(len(self.conv)/2)])
+
+
+            
+        #t = np.linspace(-self.fLength,self.fLength,len(self.conv))
+        #self.canvas.convolutionPlot.plot(t_fx,self.fx)
+        
+        t_gx = np.linspace(value,value+1,len(self.gx))
+        self.canvas.convolutionPlot.plot(self.t_fx,self.fx)
+        self.canvas.convolutionPlot.plot(t_gx,self.gx)
+        self.canvas.convolutionPlot.set_xlim(-2,2)
+        self.canvas.draw()
+        
         # self.plot_refs['convolution'][0].set_ydata()
         # plot 3 functions in one plot pyqt5 matplotlib, maybe with different colors
         # fx, gx, and convolution of both
-
+        
     # Change amplitude of fx
     def fxAmpUpdater(self, value):
         self.fxAmpSliderValueLabel.setText(str(value))
@@ -336,11 +381,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.gxWaveFormUpdater(self.gxDropbox.currentText())
         
     # Function readers
-    def createSlider(self,min,max,val):
+    def createSlider(self,min,max,val,start):
         slider = QSlider(Qt.Horizontal)
         slider.setRange(min,max)           
-        slider.setSingleStep(1) 
-        slider.setValue(val)
-        slider.setTickInterval(1)
+        slider.setSingleStep(val) 
+        slider.setValue(start)
+        slider.setTickInterval(val)
         slider.setTickPosition(QSlider.TicksBothSides)
         return slider
